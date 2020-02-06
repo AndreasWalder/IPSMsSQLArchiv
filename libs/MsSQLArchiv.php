@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MySqlArchive;
+namespace MsSqlArchive;
 
 eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/BufferHelper.php') . '}');
 eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/DebugHelper.php') . '}');
@@ -38,14 +38,19 @@ trait Database
             return false;
         }
         if (!$this->isConnected) {
-            $this->SendDebug('Connect [' . $_IPS['THREAD'] . ']', 'Start ' . sprintf('%.3f', ((microtime(true) - $this->Runtime) * 1000)) . ' ms', 0);
-            $this->DB = @new \mysqli('p:' . $this->ReadPropertyString('Host'), $this->ReadPropertyString('Username'), $this->ReadPropertyString('Password'));
-            if ($this->DB->connect_errno == 0) {
-                $this->isConnected = true;
-                $this->SendDebug('Login [' . $_IPS['THREAD'] . ']', sprintf('%.3f', ((microtime(true) - $this->Runtime) * 1000)) . ' ms', 0);
-                return true;
-            }
-            return false;
+          try {
+	        $serverName = $this->ReadPropertyString('Host');
+            $database = $this->ReadPropertyString('Database');
+     
+           //Mit Windows Authentication:
+           $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+           $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	       return true;
+          }
+          catch( PDOException $e ) {
+          trigger_error($this->Translate('No host for database'), E_USER_NOTICE);
+	      return false;
+         } 
         }
         return true;
     }
