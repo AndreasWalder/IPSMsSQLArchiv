@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 
-function SQL{
+trait SQL
+{
 	  //Server und Datenbank auswählen
    $serverName = "ANDREASPC\SQLEXPRESS";
    $database = "DeviceCheckData";
