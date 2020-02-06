@@ -50,7 +50,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->RegisterPropertyString('Password', '');
         $this->RegisterPropertyString('Database', 'IPS');
         $this->RegisterPropertyString('Variables', json_encode([]));
-        $this->RegisterTimer('LogData', 0, 'ACmiSQL_LogData($_IPS[\'TARGET\']);');
+        $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
         $this->Vars = [];
         $this->Buffer = [];
     }

@@ -1,11 +1,14 @@
 {
-    "id": "{{61B359A7-6E20-8E22-EE65-3AFF68B571AC}}",
+    "id": "{61B359A7-6E20-8E22-EE65-3AFF68B571AC}",
     "name": "MsSQL",
     "type": 3,
     "vendor": "",
-    "aliases": ["MsSQL"],
+    "aliases": 
+    [
+        "MsSQL"
+    ],
     "parentRequirements": [],
     "childRequirements": [],
     "implemented": [],
-    "prefix": "ACmiSQL"
+    "prefix": "SQL"
 }
