@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace MsSqlArchive;
 
-eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/BufferHelper.php') . '}');
-eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/DebugHelper.php') . '}');
+eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/BufferHelper.php') . '}');
+eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/DebugHelper.php') . '}');
 
 /*
- * @addtogroup mysqlarchiv
+ * @addtogroup mssqlarchiv
  * @{
  *
- * @package       MySQLArchiv
+ * @package       MsSQLArchiv
  * @file          module.php
  * @author        Michael Tröger <micha@nall-chan.net>
  * @copyright     2019 Michael Tröger
@@ -23,7 +23,7 @@ eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper
 trait Database
 {
     /**
-     * @var mysqli
+     * @var mssqli
      */
     private $DB = null;
 
@@ -86,7 +86,7 @@ trait Database
         }
         $query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
         $result = $this->DB->query($query);
-        /* @var $result mysqli_result */
+        /* @var $result mssqli_result */
         return !($result->num_rows == 0);
     }
 
@@ -134,7 +134,7 @@ trait Database
         }
 
         $query = 'DELETE FROM var' . $VariableID . ' WHERE ((timestamp >= from_unixtime(' . $Startzeit . ')) and (timestamp <= from_unixtime(' . $Endzeit . ')));';
-        /* @var $result mysqli_result */
+        /* @var $result mssqli_result */
         $result = $this->DB->query($query);
         if ($result) {
             $result = $this->DB->affected_rows;
@@ -154,7 +154,7 @@ trait Database
                 'and (timestamp <= from_unixtime(' . $Endzeit . '))) ' .
                 'ORDER BY timestamp DESC ' .
                 'LIMIT ' . $Limit;
-        /* @var $result mysqli_result */
+        /* @var $result mssqli_result */
         $result = $this->DB->query($query);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -221,7 +221,7 @@ trait Database
                 'AND from_unixtime(' . $Endzeit . ') GROUP BY timestamp div ' . $Time . ' ' .
                 "ORDER BY 'TimeStamp' DESC " .
                 'LIMIT ' . $Limit;
-        /* @var $result mysqli_result */
+        /* @var $result mssqli_result */
         $result = $this->DB->query($query);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -253,7 +253,7 @@ trait Database
                 'FROM  var' . $VariableId . ' ' .
                 'ORDER BY timestamp ASC ' .
                 'LIMIT 1';
-        /* @var $sqlresult mysqli_result */
+        /* @var $sqlresult mssqli_result */
 
         $sqlresult = $this->DB->query($query);
         $Result['FirstTimestamp'] = (int) $sqlresult->fetch_row()[0];
