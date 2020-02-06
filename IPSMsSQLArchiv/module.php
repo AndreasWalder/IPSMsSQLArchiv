@@ -23,13 +23,6 @@ eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper
  */
 class ArchiveControlMsSQL extends ipsmodule
 {
-    }
-    public function __construct($InstanceID)
-    {
-        $this->Runtime = microtime(true);
-        parent::__construct($InstanceID);
-    }
-
     /**
      * Interne Funktion des SDK.
      */
