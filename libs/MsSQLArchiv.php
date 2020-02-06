@@ -2,43 +2,6 @@
 
 declare(strict_types=1);
 
-
-trait SQL
-{
-	  //Server und Datenbank auswählen
-   $serverName = "ANDREASPC\SQLEXPRESS";
-   $database = "DeviceCheckData";
-
-   // Benutzermame und Kennwort definieren
-   //$uid = "Andreas";
-   //$pwd = "AndyA1";
-    
-    //Datenbankverbindung Herstellen
-   try {
-       //Mit Passwort Abfrage:
-      //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", $uid, $pwd);
-      //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-     
-     
-     //Mit Windows Authentication:
-      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-   }
-   catch( PDOException $e ) {
-      die( "Error connecting to SQL Server" );
-   } 
-    //SQL Query
-    $query = 'SELECT Code, Description FROM enumFunctions';
-
-    //Schleifendurchlauf
-   $stmt = $conn->query( $query );
-   while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
-   //Name auswählen und die Value anzeigen
-    echo "<option value='" . $row['Code'] . "'>" . $row['Description'] . "</option>";
-  }
-}
-
-
 namespace MsSqlArchive;
 
 eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/BufferHelper.php') . '}');
@@ -79,6 +42,41 @@ trait Database
         }
         return true;
     }
+	
+   function SQL()
+   {
+	  //Server und Datenbank auswählen
+   $serverName = "ANDREASPC\SQLEXPRESS";
+   $database = "DeviceCheckData";
+
+   // Benutzermame und Kennwort definieren
+   //$uid = "Andreas";
+   //$pwd = "AndyA1";
+    
+    //Datenbankverbindung Herstellen
+   try {
+       //Mit Passwort Abfrage:
+      //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", $uid, $pwd);
+      //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+     
+     
+     //Mit Windows Authentication:
+      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+   }
+   catch( PDOException $e ) {
+      die( "Error connecting to SQL Server" );
+   } 
+    //SQL Query
+    $query = 'SELECT Code, Description FROM enumFunctions';
+
+    //Schleifendurchlauf
+   $stmt = $conn->query( $query );
+   while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
+   //Name auswählen und die Value anzeigen
+    echo "<option value='" . $row['Code'] . "'>" . $row['Description'] . "</option>";
+  }
+}
 
     protected function CreateDB()
     {
