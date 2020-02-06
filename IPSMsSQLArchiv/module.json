@@ -1,9 +1,9 @@
 {
-    "id": "{{61B359A7-6E20-8E22-EE65-3AFF68B571AB}}",
-    "name": "Archive Control MsSQL",
-    "type": 0,
+    "id": "{{61B359A7-6E20-8E22-EE65-3AFF68B571AC}}",
+    "name": "MsSQL",
+    "type": 3,
     "vendor": "",
-    "aliases": ["Archiv MsSQL"],
+    "aliases": ["MsSQL"],
     "parentRequirements": [],
     "childRequirements": [],
     "implemented": [],
