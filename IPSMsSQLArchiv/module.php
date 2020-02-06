@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../libs/MySQLArchiv.php';  // diverse Klassen
-eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/SemaphoreHelper.php') . '}');
+require_once __DIR__ . '/../libs/MsSQLArchiv.php';  // diverse Klassen
+eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/SemaphoreHelper.php') . '}');
 
 /**
  * ArchiveControlMySQL Klasse für die das loggen von Variablen in einer MySQL Datenbank.
@@ -21,7 +21,7 @@ eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper
  * @property array $Buffer
  * @property mysqli $DB
  */
-class ArchiveControlMySQL extends ipsmodule
+class ArchiveControlMsSQL extends ipsmodule
 {
     use \MySqlArchive\Semaphore,
         \MySqlArchive\BufferHelper,
@@ -50,7 +50,7 @@ class ArchiveControlMySQL extends ipsmodule
         $this->RegisterPropertyString('Password', '');
         $this->RegisterPropertyString('Database', 'IPS');
         $this->RegisterPropertyString('Variables', json_encode([]));
-        $this->RegisterTimer('LogData', 0, 'ACmySQL_LogData($_IPS[\'TARGET\']);');
+        $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
         $this->Vars = [];
         $this->Buffer = [];
     }
