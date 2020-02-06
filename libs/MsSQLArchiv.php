@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace MsSqlArchive;
 
-eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/BufferHelper.php') . '}');
-eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/DebugHelper.php') . '}');
-
 /*
  * @addtogroup mssqlarchiv
  * @{
@@ -25,8 +22,6 @@ trait Database
     /**
      * @var mssqli
      */
-    private $DB = null;
-
     /**
      * @var bool
      */
