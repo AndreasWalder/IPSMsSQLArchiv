@@ -1,0 +1,11 @@
+{
+    "id": "{{61B359A7-6E20-8E22-EE65-3AFF68B571AB}}",
+    "name": "Archive Control MsSQL",
+    "type": 0,
+    "vendor": "",
+    "aliases": ["Archiv MsSQL"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "ACmySQL"
+}
