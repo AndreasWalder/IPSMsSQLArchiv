@@ -337,19 +337,37 @@ class ArchiveControlMsSQL extends ipsmodule
      */
     private function LoginAndSelectDB()
     {
-        if (!$this->Login()) {
-            if ($this->DB) {
-                trigger_error($this->DB->connect_error, E_USER_NOTICE);
-            } else {
-                trigger_error($this->Translate('No host for database'), E_USER_NOTICE);
-            }
-            return false;
-        }
-        if (!$this->SelectDB()) {
-            trigger_error($this->DB->error, E_USER_NOTICE);
-            return false;
-        }
-        return true;
+          //Server und Datenbank auswählen
+   $serverName = "ANDREASPC\SQLEXPRESS";
+   $database = "DeviceCheckData";
+
+   // Benutzermame und Kennwort definieren
+   //$uid = "Andreas";
+   //$pwd = "AndyA1";
+    
+    //Datenbankverbindung Herstellen
+   try {
+       //Mit Passwort Abfrage:
+      //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", $uid, $pwd);
+      //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+     
+     
+     //Mit Windows Authentication:
+      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+   }
+   catch( PDOException $e ) {
+      die( "Error connecting to SQL Server" );
+   } 
+    //SQL Query
+    $query = 'SELECT Code, Description FROM enumFunctions';
+
+    //Schleifendurchlauf
+   $stmt = $conn->query( $query );
+   while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
+   //Name auswählen und die Value anzeigen
+    echo "<option value='" . $row['Code'] . "'>" . $row['Description'] . "</option>";
+  }
     }
 
     //################# PUBLIC
