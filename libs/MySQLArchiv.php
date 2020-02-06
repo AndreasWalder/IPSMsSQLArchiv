@@ -2,11 +2,16 @@
 
 declare(strict_types=1);
 
+namespace MySqlArchive;
+
+eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/BufferHelper.php') . '}');
+eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/DebugHelper.php') . '}');
+
 /*
- * @addtogroup mssqlarchiv
+ * @addtogroup mysqlarchiv
  * @{
  *
- * @package       MsSQLArchiv
+ * @package       MySQLArchiv
  * @file          module.php
  * @author        Michael Tröger <micha@nall-chan.net>
  * @copyright     2019 Michael Tröger
@@ -18,8 +23,10 @@ declare(strict_types=1);
 trait Database
 {
     /**
-     * @var mssqli
+     * @var mysqli
      */
+    private $DB = null;
+
     /**
      * @var bool
      */
@@ -31,19 +38,14 @@ trait Database
             return false;
         }
         if (!$this->isConnected) {
-          try {
-	        $serverName = $this->ReadPropertyString('Host');
-            $database = $this->ReadPropertyString('Database');
-     
-           //Mit Windows Authentication:
-           $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-           $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	       return true;
-          }
-          catch( PDOException $e ) {
-          trigger_error($this->Translate('No host for database'), E_USER_NOTICE);
-	      return false;
-         } 
+            $this->SendDebug('Connect [' . $_IPS['THREAD'] . ']', 'Start ' . sprintf('%.3f', ((microtime(true) - $this->Runtime) * 1000)) . ' ms', 0);
+            $this->DB = @new \mysqli('p:' . $this->ReadPropertyString('Host'), $this->ReadPropertyString('Username'), $this->ReadPropertyString('Password'));
+            if ($this->DB->connect_errno == 0) {
+                $this->isConnected = true;
+                $this->SendDebug('Login [' . $_IPS['THREAD'] . ']', sprintf('%.3f', ((microtime(true) - $this->Runtime) * 1000)) . ' ms', 0);
+                return true;
+            }
+            return false;
         }
         return true;
     }
@@ -79,7 +81,7 @@ trait Database
         }
         $query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
         $result = $this->DB->query($query);
-        /* @var $result mssqli_result */
+        /* @var $result mysqli_result */
         return !($result->num_rows == 0);
     }
 
@@ -127,7 +129,7 @@ trait Database
         }
 
         $query = 'DELETE FROM var' . $VariableID . ' WHERE ((timestamp >= from_unixtime(' . $Startzeit . ')) and (timestamp <= from_unixtime(' . $Endzeit . ')));';
-        /* @var $result mssqli_result */
+        /* @var $result mysqli_result */
         $result = $this->DB->query($query);
         if ($result) {
             $result = $this->DB->affected_rows;
@@ -147,7 +149,7 @@ trait Database
                 'and (timestamp <= from_unixtime(' . $Endzeit . '))) ' .
                 'ORDER BY timestamp DESC ' .
                 'LIMIT ' . $Limit;
-        /* @var $result mssqli_result */
+        /* @var $result mysqli_result */
         $result = $this->DB->query($query);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -214,7 +216,7 @@ trait Database
                 'AND from_unixtime(' . $Endzeit . ') GROUP BY timestamp div ' . $Time . ' ' .
                 "ORDER BY 'TimeStamp' DESC " .
                 'LIMIT ' . $Limit;
-        /* @var $result mssqli_result */
+        /* @var $result mysqli_result */
         $result = $this->DB->query($query);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -246,7 +248,7 @@ trait Database
                 'FROM  var' . $VariableId . ' ' .
                 'ORDER BY timestamp ASC ' .
                 'LIMIT 1';
-        /* @var $sqlresult mssqli_result */
+        /* @var $sqlresult mysqli_result */
 
         $sqlresult = $this->DB->query($query);
         $Result['FirstTimestamp'] = (int) $sqlresult->fetch_row()[0];

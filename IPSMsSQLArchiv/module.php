@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../libs/MsSQLArchiv.php';  // diverse Klassen
+require_once __DIR__ . '/../libs/MySQLArchiv.php';  // diverse Klassen
+eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/SemaphoreHelper.php') . '}');
 
 /**
- * ArchiveControlMsSQL Klasse für die das loggen von Variablen in einer MsSQL Datenbank.
+ * ArchiveControlMySQL Klasse für die das loggen von Variablen in einer MySQL Datenbank.
  * Erweitert ipsmodule.
  *
  * @author        Michael Tröger <micha@nall-chan.net>
@@ -18,10 +19,25 @@ require_once __DIR__ . '/../libs/MsSQLArchiv.php';  // diverse Klassen
  *
  * @property array $Vars
  * @property array $Buffer
- * @property mssqli $DB
+ * @property mysqli $DB
  */
-class ArchiveControlMsSQL extends ipsmodule
+class ArchiveControlMySQL extends ipsmodule
 {
+    use \MySqlArchive\Semaphore,
+        \MySqlArchive\BufferHelper,
+        \MySqlArchive\DebugHelper,
+        \MySqlArchive\Database,
+        \MySqlArchive\VariableWatch {
+        \MySqlArchive\Semaphore::lock as TraitLock;
+    }
+    private $Runtime;
+
+    public function __construct($InstanceID)
+    {
+        $this->Runtime = microtime(true);
+        parent::__construct($InstanceID);
+    }
+
     /**
      * Interne Funktion des SDK.
      */
@@ -34,8 +50,8 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->RegisterPropertyString('Password', '');
         $this->RegisterPropertyString('Database', 'IPS');
         $this->RegisterPropertyString('Variables', json_encode([]));
-        $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
-        $this->Vars = [1];
+        $this->RegisterTimer('LogData', 0, 'ACmySQL_LogData($_IPS[\'TARGET\']);');
+        $this->Vars = [];
         $this->Buffer = [];
     }
 
@@ -319,7 +335,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return bool True bei Erfolg, sonst false.
      */
-     private function LoginAndSelectDB()
+    private function LoginAndSelectDB()
     {
         if (!$this->Login()) {
             if ($this->DB) {
