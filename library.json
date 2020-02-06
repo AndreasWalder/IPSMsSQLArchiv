@@ -2,6 +2,7 @@
     "id": "{10B10AEF-D177-1386-BD49-9FE75C62516C}",
     "author": "Andreas powerd by Michael Tr\u00f6ger",
     "name": "MsSQLArchive Library",
+	"url": "https://github.com/AndreasWalder/IPSMsSQLArchiv",
     "compatibility": {
         "version": "5.1"
     },
