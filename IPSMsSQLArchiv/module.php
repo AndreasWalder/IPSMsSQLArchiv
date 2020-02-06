@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../libs/MsSQLArchiv.php';  // diverse Klassen
-eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/SemaphoreHelper.php') . '}');
 
 /**
  * ArchiveControlMsSQL Klasse für die das loggen von Variablen in einer MsSQL Datenbank.
