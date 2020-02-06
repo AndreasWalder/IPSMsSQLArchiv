@@ -23,12 +23,6 @@ eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper
  */
 class ArchiveControlMsSQL extends ipsmodule
 {
-    use \MsSqlArchive\Semaphore,
-        \MsSqlArchive\BufferHelper,
-        \MsSqlArchive\DebugHelper,
-        \MsSqlArchive\Database,
-        \MsSqlArchive\VariableWatch {
-        \MsSqlArchive\Semaphore::lock as TraitLock;
     }
     private $Runtime;
 
