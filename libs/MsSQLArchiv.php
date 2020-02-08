@@ -131,11 +131,12 @@ trait Database
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$table = $this->ReadPropertyString('Table');	
 		$VarIdWert = '1';
-		$date = date('Y/m/d H:m:s');
-		echo $date;
+		$timestamp = '31/05/2001 12:22:56';
+		$timestamp = DateTime::createFromFormat('d/m/Y H:i:s', $timestamp);
+		echo $timestamp->format('Y-m-d H:i:s');
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		//$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',' . $date . ')';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$VarId.','.$VarId.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$date.')';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$VarId.','.$VarId.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$timestamp.')';
 		$sql = "INSERT INTO dtest (stamp) VALUES (CONVERT(DATETIME, '2011-03-15T10:23:02', 126))";
 		try {
 			 $stmt = $conn->query( $query );
