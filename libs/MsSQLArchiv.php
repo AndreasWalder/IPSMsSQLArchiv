@@ -40,7 +40,7 @@ trait Database
     //$database = $this->ReadPropertyString('Database');
 	
 	$serverName = "ANDREASPC\SQLEXPRESS";
-    $database = "DeviceCheckData";
+    $database = "IPS";
 
 
    // Benutzermame und Kennwort definieren
