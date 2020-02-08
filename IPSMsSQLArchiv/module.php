@@ -127,7 +127,7 @@ class ArchiveControlMsSQL extends ipsmodule
             return;
         }
 		
-		if (!$this->TableExists()) {
+		if (!$this->TableExist()) {
             echo $this->Translate('Error on create table.');
             $this->SetStatus(IS_EBASE + 2);
             return;

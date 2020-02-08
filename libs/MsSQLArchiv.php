@@ -69,7 +69,7 @@ trait Database
         return false;
     }
 
-    protected function TableExists($VarId)
+    protected function TableExist()
     {
         if (!$this->isConnected) {
             return false;
@@ -99,6 +99,11 @@ trait Database
 			return false;
 		}  
 	    return true;  
+    }
+	
+	protected function TableExists($VarId)
+    {
+		
     }
 
     protected function CreateAddToTable($VarId, $VarTyp)
