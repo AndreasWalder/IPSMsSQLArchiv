@@ -92,15 +92,8 @@ trait Database
 			[Description] [nvarchar](max) NULL,
 			[Value] [nvarchar](max) NULL,
 			[Unit] [nvarchar](20) NULL,
-			[LastUpdate] [datetime] NULL,
-			CONSTRAINT [PK_tbSettings] PRIMARY KEY CLUSTERED 
-			(	
-			[Id] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-			) ON [PRIMARY]
-			GO
-			ALTER TABLE [dbo].[tbSettings] ADD  CONSTRAINT [DF_tbSettings_Id]  DEFAULT (newid()) FOR [Id]
-			GO';
+			[LastUpdate] [datetime] NULL)';
+			
 		
 		
 		try {
