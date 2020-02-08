@@ -17,10 +17,25 @@ trait Database
 	  if ($this->ReadPropertyString('Database') == '') {
        return false;
       }
+	  if ($this->ReadPropertyString('Username') <> '') and ($this->ReadPropertyString('Password') <> '') {
+       try {
+			$serverName = $this->ReadPropertyString('Host');
+            $database = $this->ReadPropertyString('Database');
+			$Username = $this->ReadPropertyString('Username');
+			$Password = $this->ReadPropertyString('Password');
+			$conn = new PDO( "sqlsrv:server=$serverName;Database=$database", $Username, $Password);   
+			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		}
+		catch( PDOException $e ) {
+              return false;
+		}	 
+		return true;
+      }
+	  
 		try {
 			$serverName = $this->ReadPropertyString('Host');
             $database = $this->ReadPropertyString('Database');
-			$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			$conn = new PDO( "sqlsrv:server=$serverName;Database=$database", NULL, NULL);   
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
 		catch( PDOException $e ) {
