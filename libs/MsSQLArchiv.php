@@ -137,8 +137,9 @@ trait Database
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$table = $this->ReadPropertyString('Table');	
 		$ParentId = $this->ReadPropertyInteger('ParentId');
+		$VarName = IPS_GetName($VarId);
 		$VarIdWert = '1';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$VarName.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		try {
 			 $stmt = $conn->query( $query );
 			}
