@@ -128,13 +128,13 @@ trait Database
 		$serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$conn->setAttribute(PDO::SQLSRV_ATTR_FETCHES_DATETIME_TYPE, true);
 		$table = $this->ReadPropertyString('Table');	
 		$VarIdWert = '1';
 		$date = date('Y-m-d H:i:s');
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		//$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',' . $date . ')';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$VarId.','.$VarId.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',"26-03-2019 00:00:00.000")';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$VarId.','.$VarId.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$date.')';
 		try {
 			 $stmt = $conn->query( $query );
 			}
