@@ -95,10 +95,18 @@ trait Database
             return false;
         }
         //$query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
-     	$query = 'SELECT id, value, timestamp FROM . $VarId .';
-        $result = $conn->query( $query );
-        /* @var $result mysqli_result */
-        return !($result->num_rows == 0);
+		
+		try {
+        $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$query = 'SELECT id, value, timestamp FROM . $VarId .';
+		$result = $conn->query( $query );
+        }
+        catch( PDOException $e ) {
+           trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
+	       return true;
+        }    
+        return 1;
     }
 
     protected function CreateTable($VarId, $VarTyp)
@@ -125,7 +133,7 @@ trait Database
         try {
         $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
         $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		$query = 'CREATE TABLE' . $VarId . ' (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
+		$query = 'CREATE TABLE' . $VarId . ' (id BIGINT, ' . $Typ . 'timestamp DATETIME);';
 		$result = $conn->query( $query );
         }
         catch( PDOException $e ) {
