@@ -85,7 +85,7 @@ trait Database
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$Typ = 'value nvarchar(max), ';
 		$query = 'CREATE TABLE [dbo].[' . $table . '](
-			[Id] [uniqueidentifier] AUTO_INCREMENT PRIMARY KEY,
+			ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
 			[ParentId] [int] NULL,
 			[ChildId] [int] NULL,
 			[KeyValue] [nvarchar](40) NULL,
