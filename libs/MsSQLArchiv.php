@@ -144,7 +144,7 @@ trait Database
 		
 		
 		
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$Test.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		$res = $conn->prepare($query);
         $res->bindValue(':KeyValue', iconv('UTF-8', 'ISO8859-1', $Test);
 		try {
