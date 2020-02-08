@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../libs/MsSQLArchiv.php';  // diverse Klassen
-require_once __DIR__ . '/../libs/helper/SemaphoreHelper.php';
 eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/SemaphoreHelper.php') . '}');
 
 /**
