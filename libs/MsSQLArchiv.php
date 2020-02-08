@@ -76,9 +76,9 @@ trait Database
         }
         $serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
-		if ($this->ReadPropertyString('Database') == '') {
-	     echo $this->Translate('Table has no name.');
-         return false;
+		if ($this->ReadPropertyString('Table') == '') {
+	       echo $this->Translate('Table has no name.');
+           return false;
         }
 		$table = $this->ReadPropertyString('Table');
 		
