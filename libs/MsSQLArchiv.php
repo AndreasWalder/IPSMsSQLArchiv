@@ -132,7 +132,7 @@ trait Database
 		$table = $this->ReadPropertyString('Table');	
 		$VarIdWert = '1';
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
-		$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ''Test'', ''Hallo'',[' . $VarIdWert . '],''Volt'',''2020-02-08'')'';
+		$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',NOW())';
 		try {
 			 $stmt = $conn->query( $query );
 			}
