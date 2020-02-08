@@ -24,7 +24,7 @@ trait Database
      * @var mysqli
      */
     private $DB = null;
-	$conn = null;
+	private $conn = null;
 
     /**
      * @var bool
