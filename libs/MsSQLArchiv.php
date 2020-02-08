@@ -84,7 +84,24 @@ trait Database
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$Typ = 'value nvarchar(max), ';
-		$query = 'CREATE TABLE [' . $table . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
+		$query = 'CREATE TABLE [dbo].[' . $table . '](
+			[Id] [uniqueidentifier] NOT NULL,
+			[ParentId] [int] NULL,
+			[ChildId] [int] NULL,
+			[KeyValue] [nvarchar](30) NULL,
+			[Description] [nvarchar](100) NULL,
+			[Value] [nvarchar](1000) NULL,
+			[LastUpdate] [datetime] NULL,
+			CONSTRAINT [PK_tbSettings] PRIMARY KEY CLUSTERED 
+			(	
+			[Id] ASC
+			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+			) ON [PRIMARY]
+			GO
+			ALTER TABLE [dbo].[tbSettings] ADD  CONSTRAINT [DF_tbSettings_Id]  DEFAULT (newid()) FOR [Id]
+			GO';
+		
+		
 		try {
 			 $stmt = $conn->query( $query );
 			}
