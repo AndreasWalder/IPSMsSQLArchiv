@@ -4,14 +4,13 @@ declare(strict_types=1);
 require_once __DIR__  . '/../libs/helper/BufferHelper.php';
 require_once __DIR__  . '/../libs/helper/DebugHelper.php';
 
-public $conn = null;
-
 trait Database
 {
     /**
      * @var mysqli
      */
     private $DB = null;
+	private $conn = null;
 	
 
     /**
@@ -45,7 +44,7 @@ trait Database
      //Mit Windows Authentication:
       $connTest = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
       $connTest->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	  $conn = $connTest;
+	  this->$conn = $connTest;
    }
    catch( PDOException $e ) {
       trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
@@ -120,7 +119,7 @@ trait Database
 		//$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		  try {
-			    $stmt = $conn->query( $query );
+			    $stmt = this->$conn->query( $query );
 				}
 		  catch( PDOException $err ) {
 				$codeNr = $err->getCode(); // Outputs: "28000"
