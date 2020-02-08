@@ -19,7 +19,7 @@ eval('namespace MsSqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper
  *
  * @property array $Vars
  * @property array $Buffer
- * @property mysqli $DB
+ * @property PDO $DB
  */
 class ArchiveControlMsSQL extends ipsmodule
 {
