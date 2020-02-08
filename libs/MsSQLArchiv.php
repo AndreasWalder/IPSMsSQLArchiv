@@ -76,7 +76,14 @@ trait Database
         }
         $serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
+		if ($this->ReadPropertyString('Database') == '') {
+	     echo $this->Translate('Table has no name.');
+         return false;
+        }
 		$table = $this->ReadPropertyString('Table');
+		
+		
+		
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$Typ = 'value nvarchar(max), ';
