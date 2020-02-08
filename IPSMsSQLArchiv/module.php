@@ -32,7 +32,7 @@ class ArchiveControlMsSQL extends ipsmodule
     }
     private $Runtime;
 
-    public function __construct($InstanceID)
+   public function __construct($InstanceID)
     {
         $this->Runtime = microtime(true);
         parent::__construct($InstanceID);
@@ -50,7 +50,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->RegisterPropertyString('Password', '');
         $this->RegisterPropertyString('Database', 'IPS');
         $this->RegisterPropertyString('Variables', json_encode([]));
-        $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
+        $this->RegisterTimer('LogData', 0, 'ACmySQL_LogData($_IPS[\'TARGET\']);');
         $this->Vars = [];
         $this->Buffer = [];
     }
@@ -127,7 +127,6 @@ class ArchiveControlMsSQL extends ipsmodule
             return;
         }
         if (!$this->SelectDB()) {
-			return;
             if (!$this->CreateDB()) {
                 echo $this->Translate('Create database failed.');
                 $this->SetStatus(IS_EBASE + 2);
@@ -142,7 +141,6 @@ class ArchiveControlMsSQL extends ipsmodule
             }
         }
         if (!$Result) {
-			return;
             echo $this->Translate('Error on create tables.');
             $this->SetStatus(IS_EBASE + 3);
             $this->Logout();
@@ -339,37 +337,19 @@ class ArchiveControlMsSQL extends ipsmodule
      */
     private function LoginAndSelectDB()
     {
-          //Server und Datenbank auswählen
-   $serverName = "ANDREASPC\SQLEXPRESS";
-   $database = "DeviceCheckData";
-
-   // Benutzermame und Kennwort definieren
-   //$uid = "Andreas";
-   //$pwd = "AndyA1";
-    
-    //Datenbankverbindung Herstellen
-   try {
-       //Mit Passwort Abfrage:
-      //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", $uid, $pwd);
-      //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-     
-     
-     //Mit Windows Authentication:
-      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-   }
-   catch( PDOException $e ) {
-      trigger_error($this->Translate('NCannot connect to database.'), E_USER_NOTICE);
-   } 
-    //SQL Query
-    $query = 'SELECT Code, Description FROM enumFunctions';
-    trigger_error($this->Translate('Database connected.'), E_USER_NOTICE);
-    //Schleifendurchlauf
-   $stmt = $conn->query( $query );
-   while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
-   //Name auswählen und die Value anzeigen
-    echo "<option value='" . $row['Code'] . "'>" . $row['Description'] . "</option>";
-  }
+        if (!$this->Login()) {
+            if ($this->DB) {
+                trigger_error($this->DB->connect_error, E_USER_NOTICE);
+            } else {
+                trigger_error($this->Translate('No host for database'), E_USER_NOTICE);
+            }
+            return false;
+        }
+        if (!$this->SelectDB()) {
+            trigger_error($this->DB->error, E_USER_NOTICE);
+            return false;
+        }
+        return true;
     }
 
     //################# PUBLIC

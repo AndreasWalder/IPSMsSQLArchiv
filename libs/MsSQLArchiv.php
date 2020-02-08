@@ -34,13 +34,34 @@ trait Database
 
     protected function Login()
     {
-        if ($this->ReadPropertyString('Host') == '') {
-            return false;
-        }
-        if (!$this->isConnected) {
-        }
-        return true;
-    }
+      if ($this->ReadPropertyString('Host') == '') {
+       return false;
+      }
+    //Server und Datenbank auswählen
+    $serverName = "ANDREASPC\SQLEXPRESS";
+    database = "DeviceCheckData";
+
+   // Benutzermame und Kennwort definieren
+   //$uid = "Andreas";
+   //$pwd = "AndyA1";
+    
+    //Datenbankverbindung Herstellen
+   try {
+       //Mit Passwort Abfrage:
+      //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", $uid, $pwd);
+      //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+       
+     //Mit Windows Authentication:
+      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+   }
+   catch( PDOException $e ) {
+      trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
+	  return false;
+   }    
+   return true;
+}
+		
 	
     protected function CreateDB()
     {
@@ -72,7 +93,7 @@ trait Database
             return false;
         }
         $query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
-        $result = $this->DB->query($query);
+        $result = $conn->query( $query );
         /* @var $result mysqli_result */
         return !($result->num_rows == 0);
     }
@@ -97,7 +118,7 @@ trait Database
                 break;
         }
         $query = 'CREATE TABLE var' . $VarId . ' (id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
-        $result = $this->DB->query($query);
+        $result = $conn->query( $query );
         $this->SendDebug('CreateTable', $result, 0);
         return $result;
     }
@@ -109,7 +130,7 @@ trait Database
         }
 
         $query = 'RENAME TABLE ' . $this->ReadPropertyString('Database') . '.var' . $OldVariableID . ' TO ' . $this->ReadPropertyString('Database') . '.var' . $NewVariableID . ';';
-        $result = $this->DB->query($query);
+        $result = $conn->query( $query );
         $this->SendDebug('RenameTable', $result, 0);
         return $result;
     }
@@ -122,7 +143,7 @@ trait Database
 
         $query = 'DELETE FROM var' . $VariableID . ' WHERE ((timestamp >= from_unixtime(' . $Startzeit . ')) and (timestamp <= from_unixtime(' . $Endzeit . ')));';
         /* @var $result mysqli_result */
-        $result = $this->DB->query($query);
+        $result = $conn->query( $query );
         if ($result) {
             $result = $this->DB->affected_rows;
         }
@@ -142,7 +163,7 @@ trait Database
                 'ORDER BY timestamp DESC ' .
                 'LIMIT ' . $Limit;
         /* @var $result mysqli_result */
-        $result = $this->DB->query($query);
+        $result = $conn->query( $query );
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -151,7 +172,7 @@ trait Database
         $query = 'SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS ' .
                 "WHERE ((TABLE_NAME = 'var" . $VariableID . "') AND (COLUMN_NAME = 'value'))";
 
-        $sqlresult = $this->DB->query($query);
+        $sqlresult = $conn->query( $query );
         switch (strtolower($sqlresult->fetch_row()[0])) {
             case 'double':
             case 'real':
@@ -209,7 +230,7 @@ trait Database
                 "ORDER BY 'TimeStamp' DESC " .
                 'LIMIT ' . $Limit;
         /* @var $result mysqli_result */
-        $result = $this->DB->query($query);
+        $result = $conn->query( $query );
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -219,7 +240,7 @@ trait Database
             return [];
         }
         $query = "SELECT right(TABLE_NAME,5) as 'VariableID' FROM information_schema.TABLES WHERE table_schema = '" . $this->ReadPropertyString('Database') . "' ORDER BY 'VariableID' ASC";
-        $sqlresult = $this->DB->query($query);
+        $sqlresult = $conn->query( $query );
         if ($sqlresult === false) {
             return [];
         }
@@ -242,7 +263,7 @@ trait Database
                 'LIMIT 1';
         /* @var $sqlresult mysqli_result */
 
-        $sqlresult = $this->DB->query($query);
+        $sqlresult = $conn->query( $query );
         $Result['FirstTimestamp'] = (int) $sqlresult->fetch_row()[0];
 
         $query = "SELECT unix_timestamp(timestamp) AS 'TimeStamp' " .
@@ -250,19 +271,19 @@ trait Database
                 'ORDER BY timestamp DESC ' .
                 'LIMIT 1';
         /* @var $sqlresult mysqli_result */
-        $sqlresult = $this->DB->query($query);
+        $sqlresult = $conn->query( $query );
         $Result['LastTimestamp'] = (int) $sqlresult->fetch_row()[0];
 
         $query = "SELECT count(*) AS 'Count' " .
                 'FROM  var' . $VariableId . ' ';
         /* @var $sqlresult mysqli_result */
-        $sqlresult = $this->DB->query($query);
+        $sqlresult = $conn->query( $query );
         $Result['Count'] = (int) $sqlresult->fetch_row()[0];
 
         $query = "SELECT count(*) AS 'Count' " .
                 'FROM  var' . $VariableId . ' ';
         /* @var $sqlresult mysqli_result */
-        $sqlresult = $this->DB->query($query);
+        $sqlresult = $conn->query( $query );
         $Result['Count'] = (int) $sqlresult->fetch_row()[0];
 
         $query = "SELECT data_length AS 'Size' " .
@@ -270,7 +291,7 @@ trait Database
                 "WHERE table_schema = '" . $this->ReadPropertyString('Database') . "' " .
                 "AND table_name = 'var" . $VariableId . "' ";
         /* @var $sqlresult mysqli_result */
-        $sqlresult = $this->DB->query($query);
+        $sqlresult = $conn->query( $query );
         $Result['Size'] = (int) $sqlresult->fetch_row()[0];
         return $Result;
     }
@@ -280,7 +301,7 @@ trait Database
         if (!$HasChanged) {
             $query = 'SELECT id,value FROM var' . $Variable . ' ORDER BY timestamp DESC LIMIT 2';
             /* @var $result mysqli_result */
-            $result = $this->DB->query($query);
+            $result = $conn->query( $query );
             if ($result === false) {
                 echo $this->DB->error;
                 return false;
@@ -290,47 +311,11 @@ trait Database
                 $ids = $result->fetch_all(MYSQLI_ASSOC);
                 if ($ids[0]['value'] === $ids[1]['value']) {
                     $query = 'UPDATE var' . $Variable . ' SET timestamp=from_unixtime(' . $Timestamp . ') WHERE id=' . $ids[0]['id'];
-                    $result = $this->DB->query($query);
+                    $result = $conn->query( $query );
                     return $result;
                 }
             }
         }
-        
-		
-		
-		 //Server und Datenbank auswählen
-   $serverName = "ANDREASPC\SQLEXPRESS";
-   $database = "DeviceCheckData";
-
-   // Benutzermame und Kennwort definieren
-   //$uid = "Andreas";
-   //$pwd = "AndyA1";
-    
-    //Datenbankverbindung Herstellen
-   try {
-       //Mit Passwort Abfrage:
-      //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", $uid, $pwd);
-      //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-     
-     
-     //Mit Windows Authentication:
-      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-   }
-   catch( PDOException $e ) {
-      trigger_error($this->Translate('NCannot connect to database.'), E_USER_NOTICE);
-   } 
-    //SQL Query
-    $query = 'INSERT INTO var' . $Variable . ' (value,timestamp) VALUES(' . $NewValue . ',from_unixtime(' . $Timestamp . '));';
-    //Schleifendurchlauf
-   $stmt = $conn->query( $query );
-   while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
-   //Name auswählen und die Value anzeigen
-    echo "<option value='" . $row['Code'] . "'>" . $row['Description'] . "</option>";
-  }
-        
-        return true;
-    }
 }
 
 trait VariableWatch
