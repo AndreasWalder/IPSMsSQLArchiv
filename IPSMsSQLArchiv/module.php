@@ -21,7 +21,7 @@ require_once __DIR__  . '/../libs/helper/SemaphoreHelper.php';
  * @property array $Buffer
  * @property mysqli $DB
  */
-class ArchiveControlMySQL extends ipsmodule
+class ArchiveControlMsSQL extends ipsmodule
 {
     use \Semaphore,
         \BufferHelper,
@@ -49,7 +49,7 @@ class ArchiveControlMySQL extends ipsmodule
         $this->RegisterPropertyString('Password', '');
         $this->RegisterPropertyString('Database', 'IPS');
         $this->RegisterPropertyString('Variables', json_encode([]));
-        $this->RegisterTimer('LogData', 0, 'ACmySQL_LogData($_IPS[\'TARGET\']);');
+        $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
         $this->Vars = [];
         $this->Buffer = [];
     }
