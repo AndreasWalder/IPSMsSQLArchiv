@@ -325,7 +325,7 @@ function VariableWatch()
      *
      * @param int $VarId IPS-ID der Variable.
      */
-    protected function UnregisterVariableWatch($VarId)
+    function UnregisterVariableWatch($VarId)
     {
         if ($VarId == 0) {
             return;
@@ -342,7 +342,7 @@ function VariableWatch()
      *
      * @param int $VarId IPS-ID der Variable.
      */
-    protected function RegisterVariableWatch(int $VarId)
+    function RegisterVariableWatch(int $VarId)
     {
         if ($VarId == 0) {
             return;
