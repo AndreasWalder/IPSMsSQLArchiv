@@ -92,7 +92,7 @@ trait Database
 			[Description] [nvarchar](max) NULL,
 			[Value] [nvarchar](max) NULL,
 			[Unit] [nvarchar](20) NULL,
-			[LastUpdate] [datetime] NULL);
+			[LastUpdate] [datetime] NULL)';
 		
 		
 		try {
