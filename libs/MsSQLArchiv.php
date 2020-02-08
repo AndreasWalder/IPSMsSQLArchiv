@@ -119,7 +119,8 @@ trait Database
                 $Typ = 'value MEDIUMBLOB, ';
                 break;
         }
-        $query = 'CREATE TABLE var' . $VarId . ' (id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
+        //$query = 'CREATE TABLE var' . $VarId . ' (id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
+		$query = 'CREATE TABLE [dbo].[' . $VarId . ']([id] [bigint] NULL,[value] [int] NULL,[timestamp] [datetime] NULL) ON [PRIMARY] GO';
         $result = $conn->query( $query );
         $this->SendDebug('CreateTable', $result, 0);
         return $result;
