@@ -141,7 +141,7 @@ trait Database
 		$Test = 'KeyValue';
 		echo $VarName;
 		$VarIdWert = '1';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX),'.$Test.'),'.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CAST('.$Test.' as nvarchar(MAX)),'.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		try {
 			 $stmt = $conn->query( $query );
 			}
