@@ -141,7 +141,7 @@ trait Database
 		$Test = iconv('UTF-8', 'UTF-8', "Hallo");
 		echo $VarName;
 		$VarIdWert = '1';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$Test.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.',"N"Test",'.$Test.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		try {
 			 $stmt = $conn->query( $query );
 			}
