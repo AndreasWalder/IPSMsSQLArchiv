@@ -23,7 +23,7 @@ trait Database
             $database = $this->ReadPropertyString('Database');
 			$Username = $this->ReadPropertyString('Username');
 			$Password = $this->ReadPropertyString('Password');
-			$ParentId = $this->ReadPropertyString('ParentId');
+			$ParentId = $this->ReadPropertyString('ParentIdText');
 			$conn = new PDO( "sqlsrv:server=$serverName;Database=$database", $Username, $Password);   
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
@@ -78,7 +78,7 @@ trait Database
 	       echo $this->Translate('Table has no name.');
            return false;
         }
-		if ($this->ReadPropertyString('ParentId') == '') {
+		if ($this->ReadPropertyString('ParentIdText') == '') {
 	       echo $this->Translate('ParentId has no name.');
            return false;
         }
@@ -136,7 +136,7 @@ trait Database
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$table = $this->ReadPropertyString('Table');	
-		$ParentId = $this->ReadPropertyString('ParentId');
+		$ParentId = $this->ReadPropertyString('ParentIdText');
 		$VarIdWert = '1';
 		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		try {

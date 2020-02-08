@@ -44,8 +44,8 @@
                                     "caption": "Table"
                                 },
 								{
-                                    "name": "ParentId",
-                                    "type": "PasswordTextBox",
+                                    "name": "ParentIdText",
+                                    "type": "ValidationTextBox",
                                     "caption": "ParentId"
                                 }]
                         }]
