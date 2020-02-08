@@ -120,10 +120,11 @@ trait Database
                 break;
         }
         //$query = 'CREATE TABLE var' . $VarId . ' (id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
-		$query = 'CREATE TABLE [dbo].[' . $VarId . ']([id] [bigint] NULL,[value] [int] NULL,[timestamp] [datetime] NULL) ON [PRIMARY] GO';
+		$query = 'CREATE TABLE ' . $VarId . '([id] [bigint] NULL,[value] [int] NULL,[timestamp] [datetime] NULL)';
         $result = $conn->query( $query );
-        $this->SendDebug('CreateTable', $result, 0);
-        return $result;
+        //$this->SendDebug('CreateTable', $result, 0);
+        //return $result;
+		return true;
     }
 
     protected function RenameTable($OldVariableID, $NewVariableID)
