@@ -125,6 +125,7 @@ class ArchiveControlMsSQL extends ipsmodule
             $this->SetStatus(IS_EBASE + 2);
             return;
         }
+		
         if (!$this->SelectDB()) {
             if (!$this->CreateDB()) {
                 echo $this->Translate('Create database failed.');
@@ -133,43 +134,10 @@ class ArchiveControlMsSQL extends ipsmodule
                 return;
             }
         }
-        $Result = true;
+        
         foreach ($Vars as $VarId => $VarTyp) {
-			switch ($VarTyp) {
-            case VARIABLETYPE_INTEGER:
-                $Typ = 'value INT, ';
-                break;
-            case VARIABLETYPE_FLOAT:
-                $Typ = 'value REAL, ';
-                break;
-            case VARIABLETYPE_BOOLEAN:
-                $Typ = 'value BIT, ';
-                break;
-            case VARIABLETYPE_STRING:
-                $Typ = 'value nvarchar(max), ';
-                break;
-        }
-		$serverName = "ANDREASPC\SQLEXPRESS";
-        $database = "IPS";
-		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
-		  try {
-			    $stmt = $conn->query( $query );
-				}
-		  catch( PDOException $err ) {
-				$codeNr = $err->getCode(); // Outputs: "28000"
-				if ($codeNr == '42S01') {
-					echo "Wert schon vorhanden!";   
-				}
-		    }  
+			CreateTable($VarId, $VarTyp);
 		}
-        if (!$Result) {
-            echo $this->Translate('Error on create tables.');
-            $this->SetStatus(IS_EBASE + 3);
-            $this->Logout();
-            return;
-        }
 
         $this->SetStatus(IS_ACTIVE);
         $this->Logout();

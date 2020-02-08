@@ -112,9 +112,6 @@ trait Database
 
     protected function CreateTable($VarId, $VarTyp)
     {
-        if (!$this->isConnected) {
-            return false;
-        }
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
                 $Typ = 'value INT, ';
@@ -131,17 +128,18 @@ trait Database
         }
 		$serverName = "ANDREASPC\SQLEXPRESS";
         $database = "IPS";
-        try {
-        $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		$query = 'CREATE TABLE' . $VarId . ' (id BIGINT, ' . $Typ . 'timestamp DATETIME);';
-		$result = $conn->query( $query );
-        }
-        catch( PDOException $e ) {
-           trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
-	       return true;
-        }    
-		return true;
+		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
+		  try {
+			    $stmt = $conn->query( $query );
+				}
+		  catch( PDOException $err ) {
+				$codeNr = $err->getCode(); // Outputs: "28000"
+				if ($codeNr == '42S01') {
+					echo "Wert schon vorhanden!";   
+				}
+		    }  
     }
 
     protected function RenameTable($OldVariableID, $NewVariableID)
