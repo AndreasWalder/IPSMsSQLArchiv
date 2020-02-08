@@ -143,6 +143,7 @@ class ArchiveControlMsSQL extends ipsmodule
 					$query = 'SELECT id, value, timestamp FROM . $VarId .';
 					$result = $conn->query( $query );
 				}
+					catch( PDOException $e ) {
 					$this->CreateTable($VarId, $VarTyp);
 				}    
 		}
