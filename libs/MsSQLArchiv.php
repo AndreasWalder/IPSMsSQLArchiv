@@ -315,7 +315,6 @@ trait Database
             }
         }
 }
-namespace MySqlArchive;
 
 trait VariableWatch
 {
