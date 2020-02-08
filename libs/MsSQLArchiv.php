@@ -134,7 +134,7 @@ trait Database
 		$date = date('Y-m-d H:i:s');
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		//$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',' . $date . ')';
-		$query = 'INSERT INTO [' . $table . '] (ParentId) VALUES (123)';
+		$query = 'INSERT INTO [' . $table . '] (ParentId) VALUES (' . $table . ')';
 		try {
 			 $stmt = $conn->query( $query );
 			}
