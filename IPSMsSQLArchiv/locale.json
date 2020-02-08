@@ -5,6 +5,7 @@
             "Database": "Datenbank",
             "Username": "Benutzername",
             "Password": "Passwort",
+			"Table": "Tabelle",
             "Variable ID": "Variablen ID",
             "First value": "Erster Wert",
             "Last value": "Letzter Wert",

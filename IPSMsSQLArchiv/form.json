@@ -34,6 +34,15 @@
                                     "type": "PasswordTextBox",
                                     "caption": "Password"
                                 }]
+                        },
+						{
+                            "type": "RowLayout",
+                            "items": [
+                                {
+                                    "name": "Table",
+                                    "type": "ValidationTextBox",
+                                    "caption": "Table"
+                                }]
                         }]
                 },
                 {
