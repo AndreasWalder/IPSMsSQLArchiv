@@ -102,12 +102,12 @@ trait Database
         $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'SELECT id, value, timestamp FROM . $VarId .';
 		$result = $conn->query( $query );
+		trigger_error($this->Translate($result), E_USER_NOTICE);
         }
         catch( PDOException $e ) {
            trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
-	       return true;
+	       return false;
         }    
-        return 1;
     }
 
     protected function CreateTable($VarId, $VarTyp)
