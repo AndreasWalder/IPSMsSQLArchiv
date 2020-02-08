@@ -55,7 +55,7 @@ trait Database
         if ($this->isConnected) {
             return $this->DB->select_db($this->ReadPropertyString('Database'));
         }
-        return false;
+        return true;
     }
 
     protected function Logout()
