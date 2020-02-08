@@ -26,7 +26,7 @@ trait Database
 		catch( PDOException $e ) {
 			$codeNr = $err->getCode();
              if ($codeNr == '08001') {
-              USE master GO CREATE DATABASE Sales  
+              return false;
              }
 		}	 
 		return true;
