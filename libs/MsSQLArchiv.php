@@ -126,7 +126,7 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
                 break;
         }
-		$serverName = "ANDREASPC\SQLEXPRESS";
+		$serverName = $this->ReadPropertyString('Host');
         $database = "IPS";
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -137,7 +137,7 @@ trait Database
 		  catch( PDOException $err ) {
 				$codeNr = $err->getCode(); // Outputs: "28000"
 				if ($codeNr == '42S01') {
-					echo "Wert schon vorhanden!";   
+					//echo "Wert schon vorhanden!";   
 				}
 		    }  
     }
