@@ -11,9 +11,6 @@ trait Database
      */
     private $DB = null;
 	public $conn = null;
-	
-	public $serverName = "ANDREASPC\SQLEXPRESS";
-    public $database = "IPS";
 
     /**
      * @var bool
@@ -29,7 +26,8 @@ trait Database
     //$serverName = $this->ReadPropertyString('Host');
     //$database = $this->ReadPropertyString('Database');
 	
-	
+	$serverName = "ANDREASPC\SQLEXPRESS";
+    $database = "IPS";
 
 
    // Benutzermame und Kennwort definieren
