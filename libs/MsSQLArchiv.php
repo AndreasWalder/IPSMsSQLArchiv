@@ -137,11 +137,9 @@ trait Database
 			 $stmt = $conn->query( $query );
 			}
 		catch( PDOException $err ) {
-		     $codeNr = $err->getCode(); // Outputs: "28000"
-		if ($codeNr == '42S01') {
-			//echo "Wert schon vorhanden!";   
-			}
+		    return false;
 		}  
+		return true;
     }
 
     protected function RenameTable($OldVariableID, $NewVariableID)
