@@ -136,7 +136,7 @@ trait Database
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$table = $this->ReadPropertyString('Table');	
-		$ParentId = $this->RegisterPropertyInteger('ParentId');
+		$ParentId = $this->ReadPropertyInteger('ParentId');
 		$VarIdWert = '1';
 		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		try {
