@@ -343,3 +343,4 @@ trait Database
         $this->RegisterMessage($VarId, VM_DELETE);
         $this->RegisterMessage($VarId, VM_UPDATE);
     }
+}
