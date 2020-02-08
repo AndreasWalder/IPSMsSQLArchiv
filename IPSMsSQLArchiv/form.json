@@ -31,7 +31,7 @@
                                 },
                                 {
                                     "name": "Password",
-                                    "type": "PasswordTextBox",
+                                    "type": "PasswordTextBox","minimum": "0 ", "maximum": "10000",
                                     "caption": "Password"
                                 }]
                         },
