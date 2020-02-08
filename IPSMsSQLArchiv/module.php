@@ -23,10 +23,10 @@ eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper
  */
 class ArchiveControlMsSQL extends ipsmodule
 {
-    use \Semaphore,
-        \BufferHelper,
-        \DebugHelper,
-        \Database,
+     use \MySqlArchive\Semaphore,
+        \MySqlArchive\BufferHelper,
+        \MySqlArchive\DebugHelper,
+        \MySqlArchive\Database,
         \MySqlArchive\VariableWatch {
         \MySqlArchive\Semaphore::lock as TraitLock;
     }
