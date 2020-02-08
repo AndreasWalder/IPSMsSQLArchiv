@@ -47,7 +47,7 @@ trait Database
 			 $stmt = $conn->query( $query );
 			}
 		catch( PDOException $err ) {
-			 trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
+			 //trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
 		     return false;
 		}  
 		 return true;
