@@ -31,7 +31,7 @@ trait Database
 		}	 
 		return true;
       }
-	  
+	  if ($this->ReadPropertyString('Username') == '' and  $this->ReadPropertyString('Password') == '') {
 		try {
 			$serverName = $this->ReadPropertyString('Host');
             $database = $this->ReadPropertyString('Database');
@@ -42,8 +42,8 @@ trait Database
               return false;
 		}	 
 		return true;
-	}
-		
+	  }
+    }
 	
     protected function CreateDB()
     {
