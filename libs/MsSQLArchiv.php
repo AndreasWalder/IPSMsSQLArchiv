@@ -7,6 +7,8 @@ namespace MySqlArchive;
 eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/BufferHelper.php') . '}');
 eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/DebugHelper.php') . '}');
 
+require_once __DIR__  . '/../libs/helper/BufferHelper.php';
+require_once __DIR__  . '/../libs/helper/DebugHelper.php';
 
 /*
  * @addtogroup mysqlarchiv
