@@ -136,7 +136,7 @@ class ArchiveControlMsSQL extends ipsmodule
         }
         
         foreach ($Vars as $VarId => $VarTyp) {
-			CreateTable($VarId, $VarTyp);
+			$this->CreateTable($VarId, $VarTyp);
 		}
 
         $this->SetStatus(IS_ACTIVE);
