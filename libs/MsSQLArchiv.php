@@ -85,15 +85,19 @@ trait Database
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$Typ = 'value nvarchar(max), ';
 		$query = 'CREATE TABLE [dbo].[' . $table . '](
-			[Id] [uniqueidentifier] NOT NULL,
+			[Id] [uniqueidentifier] NOT NULL PRIMARY KEY,
 			[ParentId] [int] NULL,
 			[ChildId] [int] NULL,
 			[KeyValue] [nvarchar](40) NULL,
 			[Description] [nvarchar](max) NULL,
 			[Value] [nvarchar](max) NULL,
 			[Unit] [nvarchar](20) NULL,
-			[LastUpdate] [datetime] NULL)';
-			
+			[LastUpdate] [datetime] NULL,
+			CONSTRAINT [PK_' . $table . '] PRIMARY KEY CLUSTERED ([Id] ASC
+			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
+			GO
+			ALTER TABLE [dbo].[' . $table . '] ADD  CONSTRAINT [DF_' . $table . '_Id]  DEFAULT (newid()) FOR [Id]
+			GO)';
 		
 		
 		try {
