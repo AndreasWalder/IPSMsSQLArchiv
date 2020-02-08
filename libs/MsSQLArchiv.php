@@ -137,8 +137,10 @@ trait Database
 			 $stmt = $conn->query( $query );
 			}
 		catch( PDOException $err ) {
+			echo $this->Translate($err);
 		    return false;
 		}  
+		echo $this->Translate('Done');
 		return true;
     }
 
