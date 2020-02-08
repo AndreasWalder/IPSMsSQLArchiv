@@ -316,7 +316,14 @@ trait Database
         }
 }
 
-  protected function UnregisterVariableWatch($VarId)
+trait VariableWatch
+{
+    /**
+     * Deregistriert eine Überwachung einer Variable.
+     *
+     * @param int $VarId IPS-ID der Variable.
+     */
+    protected function UnregisterVariableWatch($VarId)
     {
         if ($VarId == 0) {
             return;
@@ -344,3 +351,6 @@ trait Database
         $this->RegisterMessage($VarId, VM_UPDATE);
     }
 }
+}
+
+/* @} */
