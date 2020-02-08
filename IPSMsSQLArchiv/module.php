@@ -125,13 +125,6 @@ class ArchiveControlMsSQL extends ipsmodule
             $this->SetStatus(IS_EBASE + 2);
             return;
         }
-		
-        if (!$this->CreateDB()) {
-            echo $this->Translate('Create database failed.');
-            $this->SetStatus(IS_EBASE + 2);
-            $this->Logout();
-            return;
-        }
         
         foreach ($Vars as $VarId => $VarTyp) {
 			$this->CreateTable($VarId, $VarTyp);

@@ -24,38 +24,10 @@ trait Database
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
 		catch( PDOException $e ) {
-			$codeNr = $e->getCode();
-             if ($codeNr == '08001') {
               return false;
-             }
 		}	 
 		return true;
 	}
-		
-	
-    protected function CreateDB()
-    {
-        try {
-			$serverName = $this->ReadPropertyString('Host');
-            $database = $this->ReadPropertyString('Database');
-			$conn = new PDO( "sqlsrv:server=$serverName;", NULL, NULL);   
-			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-			$query = 'CREATE DATABASE ' . $database . '';
-			$result = $conn->query( $query );
-		}
-		catch( PDOException $e ) {
-			return false;
-		}	 
-        return true;
-    }
-
-    protected function SelectDB()
-    {
-        if ($this->isConnected) {
-            //return $this->DB->select_db($this->ReadPropertyString('Database'));
-        }
-        return true;
-    }
 
     protected function Logout()
     {
