@@ -128,7 +128,8 @@ trait Database
 		$serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$conn->setAttribute(PDO::SQLSRV_ATTR_FETCHES_DATETIME_TYPE, true);
+        $conn->execute();
 		$table = $this->ReadPropertyString('Table');	
 		$VarIdWert = '1';
 		$date = date('d-m-Y');
