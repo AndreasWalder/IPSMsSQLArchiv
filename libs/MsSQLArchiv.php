@@ -85,7 +85,7 @@ trait Database
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$Typ = 'value nvarchar(max), ';
 		$query = 'CREATE TABLE [dbo].[' . $table . '](
-			ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+			[Id] [uniqueidentifier] NOT NULL PRIMARY KEY,
 			[ParentId] [int] NULL,
 			[ChildId] [int] NULL,
 			[KeyValue] [nvarchar](40) NULL,
@@ -93,6 +93,7 @@ trait Database
 			[Value] [nvarchar](max) NULL,
 			[Unit] [nvarchar](20) NULL,
 			[LastUpdate] [datetime] NULL)';
+			
 		
 		
 		try {
