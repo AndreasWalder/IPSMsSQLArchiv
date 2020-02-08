@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../libs/MsSQLArchiv.php';  // diverse Klassen
-file_get_contents(__DIR__ . '/../libs/helper/SemaphoreHelper.php') . '}');
+require_once __DIR__  . '/../libs/helper/SemaphoreHelper.php') . '}');
 
 /**
  * ArchiveControlMySQL Klasse für die das loggen von Variablen in einer MySQL Datenbank.
