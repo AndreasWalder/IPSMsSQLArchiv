@@ -353,5 +353,4 @@ function VariableWatch()
         $this->RegisterMessage($VarId, VM_UPDATE);
     }
 }
-
 /* @} */
