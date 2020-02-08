@@ -128,10 +128,10 @@ trait Database
 		$serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-		$conn->setAttribute(PDO::SQLSRV_ATTR_FETCHES_DATETIME_TYPE, true);
+		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$table = $this->ReadPropertyString('Table');	
 		$VarIdWert = '1';
-		$date = date('d-m-Y');
+		$date = date('Y/m/d H:m:s');
 		echo $date;
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		//$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',' . $date . ')';
