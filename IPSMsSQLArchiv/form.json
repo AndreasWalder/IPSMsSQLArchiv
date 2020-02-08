@@ -44,7 +44,7 @@
                                     "caption": "Table"
                                 },
 								{
-                                    "name": "ParentIdText",
+                                    "name": "ParentId",
                                     "type": "NumberSpinner", 
 									"minimum": "0", 
 									"maximum": "10000",
