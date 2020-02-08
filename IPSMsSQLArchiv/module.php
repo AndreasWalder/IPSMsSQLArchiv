@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../libs/MsSQLArchiv.php';  // diverse Klassen
-eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper/SemaphoreHelper.php') . '}');
+require_once __DIR__ . '/../libs/helper/SemaphoreHelper.php';
 
 /**
  * ArchiveControlMySQL Klasse für die das loggen von Variablen in einer MySQL Datenbank.
@@ -23,13 +23,11 @@ eval('namespace MySqlArchive {?>' . file_get_contents(__DIR__ . '/../libs/helper
  */
 class ArchiveControlMsSQL extends ipsmodule
 {
-     use \MySqlArchive\Semaphore,
-        \MySqlArchive\BufferHelper,
-        \MySqlArchive\DebugHelper,
-        \MySqlArchive\Database,
-        \MySqlArchive\VariableWatch {
-        \MySqlArchive\Semaphore::lock as TraitLock;
-    }
+    use \Semaphore,
+        \BufferHelper,
+        \DebugHelper,
+        \Database,
+       
     private $Runtime;
 
    public function __construct($InstanceID)
