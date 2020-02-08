@@ -28,6 +28,20 @@ trait Database
 		}	 
 		return true;
 	}
+		
+	
+    protected function CreateDB()
+    {
+        return true;
+    }
+
+    protected function SelectDB()
+    {
+        if ($this->isConnected) {
+            //return $this->DB->select_db($this->ReadPropertyString('Database'));
+        }
+        return true;
+    }
 
     protected function Logout()
     {
