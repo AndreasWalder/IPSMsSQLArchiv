@@ -318,7 +318,7 @@ trait Database
         }
 }
 
-trait VariableWatch
+function VariableWatch()
 {
     /**
      * Deregistriert eine Überwachung einer Variable.
