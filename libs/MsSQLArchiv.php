@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 
 
-require_once __DIR__  . '/../libs/helper/BufferHelper.php') . '}');
-require_once __DIR__  . '/../libs/helper/DebugHelper.php') . '}');
+require_once __DIR__  . '/../libs/helper/BufferHelper.php';
+require_once __DIR__  . '/../libs/helper/DebugHelper.php';
 
 /*
  * @addtogroup mysqlarchiv
