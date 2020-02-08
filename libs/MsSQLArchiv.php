@@ -295,7 +295,7 @@ trait Database
                 }
             }
         }
-        $query = 'INSERT INTO var' . $Variable . ' (value,timestamp) VALUES(' . $NewValue . ',from_unixtime(' . $Timestamp . '));';
+        
 		
 		
 		 //Server und Datenbank auswählen
@@ -321,8 +321,7 @@ trait Database
       trigger_error($this->Translate('NCannot connect to database.'), E_USER_NOTICE);
    } 
     //SQL Query
-    $query = 'SELECT Code, Description FROM enumFunctions';
-    trigger_error($this->Translate('Database connected.'), E_USER_NOTICE);
+    $query = 'INSERT INTO var' . $Variable . ' (value,timestamp) VALUES(' . $NewValue . ',from_unixtime(' . $Timestamp . '));';
     //Schleifendurchlauf
    $stmt = $conn->query( $query );
    while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
