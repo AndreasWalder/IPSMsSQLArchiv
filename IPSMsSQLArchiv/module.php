@@ -135,10 +135,18 @@ class ArchiveControlMsSQL extends ipsmodule
         }
         $Result = true;
         foreach ($Vars as $VarId => $VarTyp) {
-            if (!$this->TableExists($VarId)) {
-                $Result = $Result && $this->CreateTable($VarId, $VarTyp);
-            }
-        }
+            try {
+					$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+					$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+					$query = 'SELECT id, value, timestamp FROM . $VarId .';
+					$result = $conn->query( $query );
+				}
+					catch( PDOException $e ) {
+					trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
+					return true;
+				}    
+				return 1;
+		}
         if (!$Result) {
             echo $this->Translate('Error on create tables.');
             $this->SetStatus(IS_EBASE + 3);
