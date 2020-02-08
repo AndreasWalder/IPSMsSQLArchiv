@@ -36,12 +36,8 @@ trait Database
        return false;
       }
     //Server und Datenbank auswählen
-    //$serverName = $this->ReadPropertyString('Host');
-    //$database = $this->ReadPropertyString('Database');
-	
-	$serverName = "ANDREASPC\SQLEXPRESS";
-    $database = "IPS";
-
+    $serverName = $this->ReadPropertyString('Host');
+    $database = $this->ReadPropertyString('Database');
 
    // Benutzermame und Kennwort definieren
    //$uid = "Andreas";
@@ -127,7 +123,9 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
                 break;
         }
-		$conn = new PDO( "sqlsrv:server=$serverName;Database = ReadPropertyString('Database')", NULL, NULL);   
+		$serverName = $this->ReadPropertyString('Host');
+        $database = $this->ReadPropertyString('Database');
+		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		  try {
