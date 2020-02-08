@@ -23,7 +23,7 @@ trait Database
             $database = $this->ReadPropertyString('Database');
 			$Username = $this->ReadPropertyString('Username');
 			$Password = $this->ReadPropertyString('Password');
-			$ParentId = $this->RegisterPropertyInteger('ParentId', 0);
+			$ParentId = $this->ReadPropertyInteger('ParentId');
 			$conn = new PDO( "sqlsrv:server=$serverName;Database=$database", $Username, $Password);   
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
