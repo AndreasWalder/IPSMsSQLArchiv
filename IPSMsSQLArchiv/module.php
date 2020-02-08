@@ -28,7 +28,7 @@ class ArchiveControlMsSQL extends ipsmodule
         \DebugHelper,
         \Database,
         \VariableWatch, {
-        \Semaphore::lock as Function;
+        \Semaphore::lock as TraitLock;
     }
     private $Runtime;
 
