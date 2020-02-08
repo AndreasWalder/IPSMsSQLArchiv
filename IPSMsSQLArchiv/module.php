@@ -28,7 +28,7 @@ class ArchiveControlMsSQL extends ipsmodule
         \DebugHelper,
         \Database,
         \VariableWatch {
-        \Semaphore,
+        \Semaphore;
     }
     private $Runtime;
 
