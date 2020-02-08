@@ -45,7 +45,7 @@
                                 },
 								{
                                     "name": "ParentIdText",
-                                    "type": "ValidationTextBox",
+                                    "type": "NumberSpinner",
                                     "caption": "ParentId"
                                 }]
                         }]
