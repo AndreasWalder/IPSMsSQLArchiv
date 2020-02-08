@@ -17,7 +17,7 @@ trait Database
 	  if ($this->ReadPropertyString('Database') == '') {
        return false;
       }
-	  if ($this->ReadPropertyString('Username') <> '') and ($this->ReadPropertyString('Password') <> '') {
+	  if ($this->ReadPropertyString('Username') <> '' and  $this->ReadPropertyString('Password') <> '') {
        try {
 			$serverName = $this->ReadPropertyString('Host');
             $database = $this->ReadPropertyString('Database');
