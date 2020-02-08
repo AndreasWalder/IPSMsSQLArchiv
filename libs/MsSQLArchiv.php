@@ -77,15 +77,12 @@ trait Database
 	       echo $this->Translate('Table has no name.');
            return false;
         }
-		$table = $this->ReadPropertyString('Table');
-		
-		
-		
+		$table = $this->ReadPropertyString('Table');	
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		$Typ = 'value nvarchar(max), ';
+
 		$query = 'CREATE TABLE [dbo].[' . $table . '](
-			[Id] [UNIQUEIDENTIFIER] IDENTITY(1,1) PRIMARY KEY,
+			[Id] [int] IDENTITY(1,1) PRIMARY KEY,
 			[ParentId] [int] NULL,
 			[ChildId] [int] NULL,
 			[KeyValue] [nvarchar](40) NULL,
@@ -94,8 +91,6 @@ trait Database
 			[Unit] [nvarchar](20) NULL,
 			[LastUpdate] [datetime] NULL)';
 			
-		
-		
 		try {
 			 $stmt = $conn->query( $query );
 			}
