@@ -38,14 +38,13 @@ trait Database
 	  if ($this->ReadPropertyString('Database') == '') {
        return false;
       }
-	    return true;
 		$serverName = $this->ReadPropertyString('Host');
 		$database = $this->ReadPropertyString('Database');
-		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+		$conn = new PDO( "sqlsrv:server=$serverName;Database=$database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'DBCC CHECKDB [' . $database . ']';
 		try {
-		   $stmt = $conn->query( $query );
+		   $stmt = $conn->query($query);
 			}
 		catch( PDOException $err ) {
 		   return false;
