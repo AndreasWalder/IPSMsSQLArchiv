@@ -4,13 +4,15 @@ declare(strict_types=1);
 require_once __DIR__  . '/../libs/helper/BufferHelper.php';
 require_once __DIR__  . '/../libs/helper/DebugHelper.php';
 
+public $conn = null;
+
 trait Database
 {
     /**
      * @var mysqli
      */
     private $DB = null;
-	public $conn = null;
+	
 
     /**
      * @var bool
