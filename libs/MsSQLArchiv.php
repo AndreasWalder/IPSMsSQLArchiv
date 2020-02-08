@@ -141,14 +141,9 @@ trait Database
 		$Test = 'T';
 		echo $VarName;
 		$VarIdWert = '1';
-		
-		
-		
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$Test.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
-		$res = $conn->prepare($query);
-        $res->bindValue(':KeyValue', iconv('UTF-8', 'ISO8859-1', $Test);
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.',VALUES(CONVERT(nvarchar(MAX), 0x'.$Test.'),'.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		try {
-			 $stmt = $conn->query($res);
+			 $stmt = $conn->query( $query );
 			}
 		catch( PDOException $err ) {
 			echo $err;
