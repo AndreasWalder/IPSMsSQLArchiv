@@ -27,7 +27,7 @@ class ArchiveControlMsSQL extends ipsmodule
         \BufferHelper,
         \DebugHelper,
         \Database,
-        \VariableWatch,
+        \VariableWatch
 		
     private $Runtime;
 
