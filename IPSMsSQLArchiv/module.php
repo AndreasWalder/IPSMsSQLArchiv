@@ -134,6 +134,8 @@ class ArchiveControlMsSQL extends ipsmodule
             }
         }
         $Result = true;
+		$serverName = "ANDREASPC\SQLEXPRESS";
+        $database = "IPS";
         foreach ($Vars as $VarId => $VarTyp) {
             try {
 					$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
@@ -144,8 +146,8 @@ class ArchiveControlMsSQL extends ipsmodule
 					catch( PDOException $e ) {
 					trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
 					return true;
+					$result = false;
 				}    
-				return 1;
 		}
         if (!$Result) {
             echo $this->Translate('Error on create tables.');
