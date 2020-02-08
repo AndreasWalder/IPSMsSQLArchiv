@@ -135,9 +135,10 @@ class ArchiveControlMsSQL extends ipsmodule
         }
         $Result = true;
         foreach ($Vars as $VarId => $VarTyp) {
-            if (!$this->TableExists($VarId)) {
-                $this->CreateTable($VarId, $VarTyp);
-            }
+			$this->CreateTable($VarId, $VarTyp);
+            //if (!$this->TableExists($VarId)) {
+            //    $this->CreateTable($VarId, $VarTyp);
+            //}
         }
         if (!$Result) {
             echo $this->Translate('Error on create tables.');
