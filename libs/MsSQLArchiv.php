@@ -36,8 +36,12 @@ trait Database
        return false;
       }
     //Server und Datenbank auswählen
-    $serverName = $this->ReadPropertyString('Host');
-    $database = $this->ReadPropertyString('Database');
+    //$serverName = $this->ReadPropertyString('Host');
+    //$database = $this->ReadPropertyString('Database');
+	
+	$serverName = "ANDREASPC\SQLEXPRESS";
+    $database = "DeviceCheckData";
+
 
    // Benutzermame und Kennwort definieren
    //$uid = "Andreas";
