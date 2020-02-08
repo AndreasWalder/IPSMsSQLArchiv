@@ -35,31 +35,22 @@ trait Database
       if ($this->ReadPropertyString('Host') == '') {
        return false;
       }
-    //Server und Datenbank auswählen
-    $serverName = $this->ReadPropertyString('Host');
-    $database = $this->ReadPropertyString('Database');
-
-   // Benutzermame und Kennwort definieren
-   //$uid = "Andreas";
-   //$pwd = "AndyA1";
-    
-    //Datenbankverbindung Herstellen
-   try {
-       //Mit Passwort Abfrage:
-      //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", $uid, $pwd);
-      //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-       
-     //Mit Windows Authentication:
-      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	  $_conn = $conn;
-   }
-   catch( PDOException $e ) {
-      trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
-	  return false;
-   }    
-   return true;
-}
+	  if ($this->ReadPropertyString('Database') == '') {
+       return false;
+      }
+		$serverName = $this->ReadPropertyString('Host');
+		$database = $this->ReadPropertyString('Database');
+		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$query = 'DBCC CHECKDB [' . $database . ']';
+		try {
+			 $stmt = $conn->query( $query );
+			}
+		catch( PDOException $err ) {
+		     return false;
+		}  
+		 return true;
+	}
 		
 	
     protected function CreateDB()
@@ -128,15 +119,15 @@ trait Database
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
-		  try {
-			    $stmt = $conn->query( $query );
-				}
-		  catch( PDOException $err ) {
-				$codeNr = $err->getCode(); // Outputs: "28000"
-				if ($codeNr == '42S01') {
-					//echo "Wert schon vorhanden!";   
-				}
-		    }  
+		try {
+			 $stmt = $conn->query( $query );
+			}
+		catch( PDOException $err ) {
+		     $codeNr = $err->getCode(); // Outputs: "28000"
+		if ($codeNr == '42S01') {
+			//echo "Wert schon vorhanden!";   
+			}
+		}  
     }
 
     protected function RenameTable($OldVariableID, $NewVariableID)
