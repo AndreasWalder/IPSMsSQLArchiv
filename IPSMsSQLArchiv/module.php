@@ -142,9 +142,10 @@ class ArchiveControlMsSQL extends ipsmodule
 					$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 					$query = 'SELECT id, value, timestamp FROM . $VarId .';
 					$result = $conn->query( $query );
+					$this->CreateTable($VarId, $VarTyp);
 				}
 					catch( PDOException $e ) {
-					$this->CreateTable($VarId, $VarTyp);
+					$Result = false;
 				}    
 		}
         if (!$Result) {
