@@ -120,9 +120,19 @@ trait Database
                 break;
         }
         $query = 'CREATE TABLE' . $VarId . ' (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
-        $result = $conn->query( $query );
-        //$this->SendDebug('CreateTable', $result, 0);
-        //return $result;
+		
+		
+		$serverName = "ANDREASPC\SQLEXPRESS";
+        $database = "IPS";
+        try {
+        $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$result = $conn->query( $query );
+        }
+        catch( PDOException $e ) {
+           trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
+	       return false;
+        }    
 		return true;
     }
 
