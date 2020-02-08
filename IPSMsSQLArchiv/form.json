@@ -45,7 +45,7 @@
                                 },
 								{
                                     "name": "ParentIdText",
-                                    "type": "NumberSpinner", "minimum": "0 ", "maximum": "10000"
+                                    "type": "NumberSpinner", "minimum": "0", "maximum": "10000"
                                     "caption": "ParentId"
                                 }]
                         }]
