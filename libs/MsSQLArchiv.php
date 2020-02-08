@@ -24,7 +24,7 @@ trait Database
      * @var mysqli
      */
     private $DB = null;
-	private $_conn = null;
+	$conn = null;
 
     /**
      * @var bool
@@ -55,9 +55,9 @@ trait Database
       //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
        
      //Mit Windows Authentication:
-      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	  $_conn = $conn;
+      $connTest = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+      $connTest->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	  $conn = $connTest;
    }
    catch( PDOException $e ) {
       trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
@@ -103,7 +103,7 @@ trait Database
         //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
         //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'SELECT id, value, timestamp FROM . $VarId .';
-		$result = $_conn->query( $query );
+		$result = $conn->query( $query );
 		trigger_error($this->Translate($result), E_USER_NOTICE);
         }
         catch( PDOException $e ) {
@@ -132,7 +132,7 @@ trait Database
 		//$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		  try {
-			    $stmt = $_conn->query( $query );
+			    $stmt = $conn->query( $query );
 				}
 		  catch( PDOException $err ) {
 				$codeNr = $err->getCode(); // Outputs: "28000"
