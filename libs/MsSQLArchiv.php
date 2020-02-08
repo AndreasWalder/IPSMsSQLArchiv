@@ -24,7 +24,7 @@ trait Database
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
 		catch( PDOException $e ) {
-			$codeNr = $er->getCode();
+			$codeNr = $e->getCode();
              if ($codeNr == '08001') {
               return false;
              }
@@ -42,7 +42,7 @@ trait Database
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
 		catch( PDOException $e ) {
-			$codeNr = $er->getCode();
+			$codeNr = $e->getCode();
              if ($codeNr == '08001') {
                 $query = 'CREATE DATABASE ' . $database . '';
 					try {
