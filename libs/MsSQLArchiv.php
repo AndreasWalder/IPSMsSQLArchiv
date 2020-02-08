@@ -111,6 +111,7 @@ trait Database
 
     protected function CreateAddToTable($VarId, $VarTyp)
     {
+		echo $this->Translate('Done');
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
                 $Typ = 'value INT, ';
@@ -140,7 +141,6 @@ trait Database
 			echo $this->$err;
 		    return false;
 		}  
-		echo $this->Translate('Done');
 		return true;
     }
 
