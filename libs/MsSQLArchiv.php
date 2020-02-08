@@ -138,10 +138,10 @@ trait Database
 		$table = $this->ReadPropertyString('Table');	
 		$ParentId = $this->ReadPropertyInteger('ParentId');
 		$VarName = IPS_GetName($VarId);
-		$Test = iconv('UTF-8', 'UTF-8', "Hallo");
+		$Test = 'T';
 		echo $VarName;
 		$VarIdWert = '1';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.',"N"Test",'.$Test.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.',cast(secret as varbinary(50)),'.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		try {
 			 $stmt = $conn->query( $query );
 			}
