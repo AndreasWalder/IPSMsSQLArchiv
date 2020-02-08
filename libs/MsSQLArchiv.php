@@ -24,7 +24,10 @@ trait Database
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
 		catch( PDOException $e ) {
-			return false;
+			$codeNr = $err->getCode();
+             if ($codeNr == '08001') {
+              USE master GO CREATE DATABASE Sales  
+             }
 		}	 
 		return true;
 	}
@@ -32,10 +35,29 @@ trait Database
 	
     protected function CreateDB()
     {
-        if ($this->isConnected) {
-            //return $this->DB->query('CREATE DATABASE ' . $this->ReadPropertyString('Database'));
-        }
-        return false;
+        try {
+			$serverName = $this->ReadPropertyString('Host');
+            $database = $this->ReadPropertyString('Database');
+			$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		}
+		catch( PDOException $e ) {
+			$codeNr = $err->getCode();
+             if ($codeNr == '08001') {
+                $query = 'CREATE DATABASE ' . $database . '';
+					try {
+						$result = $conn->query( $query );
+						}
+					catch( PDOException $err ) {
+						$codeNr = $err->getCode(); // Outputs: "28000"
+						if ($codeNr == '42S01') {
+							//echo "Wert schon vorhanden!";   
+						}
+					}  
+			}
+			return false;
+		}	 
+        return true;
     }
 
     protected function SelectDB()
@@ -49,7 +71,10 @@ trait Database
     protected function Logout()
     {
         if ($this->isConnected) {
-            //return $this->DB->close();
+            $serverName = $this->ReadPropertyString('Host');
+            $database = $this->ReadPropertyString('Database');
+			$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			$conn = NULL;
         }
         return false;
     }
