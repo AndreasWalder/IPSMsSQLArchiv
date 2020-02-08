@@ -44,7 +44,7 @@ trait Database
      //Mit Windows Authentication:
       $connTest = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
       $connTest->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	  this->$conn = $connTest;
+	  $conn = $connTest;
    }
    catch( PDOException $e ) {
       trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
