@@ -1,8 +1,22 @@
 <?php
+
 declare(strict_types=1);
 
 require_once __DIR__  . '/../libs/helper/BufferHelper.php';
 require_once __DIR__  . '/../libs/helper/DebugHelper.php';
+
+/*
+ * @addtogroup mysqlarchiv
+ * @{
+ *
+ * @package       MySQLArchiv
+ * @file          module.php
+ * @author        Michael Tröger <micha@nall-chan.net>
+ * @copyright     2019 Michael Tröger
+ * @license       https://creativecommons.org/licenses/by-nc-sa/4.0/ CC BY-NC-SA 4.0
+ * @version       3.30
+ *
+ */
 
 trait Database
 {
@@ -10,7 +24,6 @@ trait Database
      * @var mysqli
      */
     private $DB = null;
-	
 
     /**
      * @var bool
@@ -41,8 +54,9 @@ trait Database
       //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
        
      //Mit Windows Authentication:
-      $this->DB = @new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-      $this->DB->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+      $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	  $_conn = $conn;
    }
    catch( PDOException $e ) {
       trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
@@ -88,7 +102,7 @@ trait Database
         //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
         //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'SELECT id, value, timestamp FROM . $VarId .';
-		$result = $this->DB->query($query);
+		$result = $_conn->query( $query );
 		trigger_error($this->Translate($result), E_USER_NOTICE);
         }
         catch( PDOException $e ) {
@@ -113,11 +127,11 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
                 break;
         }
-		//$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-		//$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$conn = new PDO( "sqlsrv:server=$serverName;Database = ReadPropertyString('Database')", NULL, NULL);   
+		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		  try {
-			    $stmt = this->$conn->query( $query );
+			    $stmt = $conn->query( $query );
 				}
 		  catch( PDOException $err ) {
 				$codeNr = $err->getCode(); // Outputs: "28000"
