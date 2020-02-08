@@ -134,12 +134,10 @@ trait Database
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',NOW())';
 		try {
-			 echo $this->Translate('Versuch1');
 			 $stmt = $conn->query( $query );
-			 echo $this->Translate('Versuch2');
 			}
 		catch( PDOException $err ) {
-			 echo $this->Translate('Versuch3');
+			echo $this->Translate($err);
 			echo $this->$err;
 		    return false;
 		}  
