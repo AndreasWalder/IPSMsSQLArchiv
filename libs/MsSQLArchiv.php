@@ -88,9 +88,10 @@ trait Database
 			[Id] [uniqueidentifier] NOT NULL,
 			[ParentId] [int] NULL,
 			[ChildId] [int] NULL,
-			[KeyValue] [nvarchar](30) NULL,
-			[Description] [nvarchar](100) NULL,
-			[Value] [nvarchar](1000) NULL,
+			[KeyValue] [nvarchar](40) NULL,
+			[Description] [nvarchar](max) NULL,
+			[Value] [nvarchar](max) NULL,
+			[Unit] [nvarchar](20) NULL,
 			[LastUpdate] [datetime] NULL,
 			CONSTRAINT [PK_tbSettings] PRIMARY KEY CLUSTERED 
 			(	
