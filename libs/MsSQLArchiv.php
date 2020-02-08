@@ -10,7 +10,6 @@ trait Database
      * @var mysqli
      */
     private $DB = null;
-	private $conn = null;
 	
 
     /**
@@ -42,9 +41,8 @@ trait Database
       //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
        
      //Mit Windows Authentication:
-      $connTest = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-      $connTest->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	  $conn = $connTest;
+      $this->DB = @new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+      $this->DB->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
    }
    catch( PDOException $e ) {
       trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
@@ -90,7 +88,7 @@ trait Database
         //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
         //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'SELECT id, value, timestamp FROM . $VarId .';
-		$result = $conn->query( $query );
+		$result = $this->DB->query($query);
 		trigger_error($this->Translate($result), E_USER_NOTICE);
         }
         catch( PDOException $e ) {
