@@ -22,17 +22,9 @@ require_once __DIR__  . '/../libs/helper/DebugHelper.php';
 
 trait Database
 {
-    /**
-     * @var mysqli
-     */
-    private $DB = null;
-
-    /**
-     * @var bool
-     */
     private $isConnected = false;
 
-    protected function Login()
+   function Login()
     {
       if ($this->ReadPropertyString('Host') == '') {
        return false;
