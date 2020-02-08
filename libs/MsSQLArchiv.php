@@ -125,7 +125,6 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
                 break;
         }
-		echo $this->Translate('Versuch1');
 		$serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
@@ -134,6 +133,7 @@ trait Database
 		$VarIdWert = '1';
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',NOW())';
+		echo $this->Translate('Versuch1');
 		try {
 			 $stmt = $conn->query( $query );
 			 echo $this->Translate('Done');
