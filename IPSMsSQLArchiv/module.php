@@ -27,9 +27,7 @@ class ArchiveControlMySQL extends ipsmodule
         \BufferHelper,
         \DebugHelper,
         \Database,
-        \VariableWatch {
-        \Semaphore::lock as TraitLock;
-    }
+        
     private $Runtime;
 
     public function __construct($InstanceID)
