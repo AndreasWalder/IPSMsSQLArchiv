@@ -107,20 +107,19 @@ trait Database
         }
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
-                $Typ = 'value INT SIGNED, ';
+                $Typ = 'value INT, ';
                 break;
             case VARIABLETYPE_FLOAT:
                 $Typ = 'value REAL, ';
                 break;
             case VARIABLETYPE_BOOLEAN:
-                $Typ = 'value BIT(1), ';
+                $Typ = 'value BIT, ';
                 break;
             case VARIABLETYPE_STRING:
-                $Typ = 'value MEDIUMBLOB, ';
+                $Typ = 'value nvarchar(max), ';
                 break;
         }
-        //$query = 'CREATE TABLE var' . $VarId . ' (id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
-		$query = 'CREATE TABLE ' . $VarId . '([id] [bigint] NULL,[value] [int] NULL,[timestamp] [datetime] NULL)';
+        $query = 'CREATE TABLE' . $VarId . ' (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME);';
         $result = $conn->query( $query );
         //$this->SendDebug('CreateTable', $result, 0);
         //return $result;
