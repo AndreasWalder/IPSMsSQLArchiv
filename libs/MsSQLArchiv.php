@@ -94,7 +94,8 @@ trait Database
         if (!$this->isConnected) {
             return false;
         }
-        $query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
+        //$query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
+     	$query = 'SELECT id, value, timestamp FROM . $VarId .';
         $result = $conn->query( $query );
         /* @var $result mysqli_result */
         return !($result->num_rows == 0);
