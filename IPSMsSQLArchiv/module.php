@@ -27,7 +27,8 @@ class ArchiveControlMySQL extends ipsmodule
         \BufferHelper,
         \DebugHelper,
         \Database,
-        
+        \VariableWatch,
+		
     private $Runtime;
 
     public function __construct($InstanceID)
