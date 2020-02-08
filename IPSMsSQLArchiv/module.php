@@ -155,13 +155,13 @@ class ArchiveControlMsSQL extends ipsmodule
         //Time critical end
         $this->SendDebug('LogData [' . $_IPS['THREAD'] . ']', count($Buffer) . ' entries', 0);
         if (!$this->Login()) {
-            if ($this->DB) {
-                echo $this->DB->connect_error;
-            }
+            //if ($this->DB) {
+            //    echo $this->DB->connect_error;
+            //}
             return;
         }
         if (!$this->SelectDB()) {
-            echo $this->DB->error;
+            //echo $this->DB->error;
             return;
         }
         foreach ($Buffer as $Data) {
@@ -313,7 +313,7 @@ class ArchiveControlMsSQL extends ipsmodule
                 $result = $this->WriteValue($Variable, sprintf('%F', $NewValue), $HasChanged, $Timestamp);
                 break;
             case VARIABLETYPE_STRING:
-                $result = $this->WriteValue($Variable, "'" . $this->DB->real_escape_string($NewValue) . "'", $HasChanged, $Timestamp);
+                //$result = $this->WriteValue($Variable, "'" . $this->DB->real_escape_string($NewValue) . "'", $HasChanged, $Timestamp);
                 break;
         }
         if (!$result) {
@@ -330,15 +330,6 @@ class ArchiveControlMsSQL extends ipsmodule
     private function LoginAndSelectDB()
     {
         if (!$this->Login()) {
-            if ($this->DB) {
-                trigger_error($this->DB->connect_error, E_USER_NOTICE);
-            } else {
-                trigger_error($this->Translate('No host for database'), E_USER_NOTICE);
-            }
-            return false;
-        }
-        if (!$this->SelectDB()) {
-            trigger_error($this->DB->error, E_USER_NOTICE);
             return false;
         }
         return true;

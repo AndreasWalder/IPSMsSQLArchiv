@@ -5,29 +5,8 @@ declare(strict_types=1);
 require_once __DIR__  . '/../libs/helper/BufferHelper.php';
 require_once __DIR__  . '/../libs/helper/DebugHelper.php';
 
-/*
- * @addtogroup mysqlarchiv
- * @{
- *
- * @package       MySQLArchiv
- * @file          module.php
- * @author        Michael Tröger <micha@nall-chan.net>
- * @copyright     2019 Michael Tröger
- * @license       https://creativecommons.org/licenses/by-nc-sa/4.0/ CC BY-NC-SA 4.0
- * @version       3.30
- *
- */
-
 trait Database
 {
-    /**
-     * @var mysqli
-     */
-    private $DB = null;
-
-    /**
-     * @var bool
-     */
     private $isConnected = false;
 
     protected function Login()
@@ -54,7 +33,7 @@ trait Database
     protected function CreateDB()
     {
         if ($this->isConnected) {
-            return $this->DB->query('CREATE DATABASE ' . $this->ReadPropertyString('Database'));
+            //return $this->DB->query('CREATE DATABASE ' . $this->ReadPropertyString('Database'));
         }
         return false;
     }
@@ -62,7 +41,7 @@ trait Database
     protected function SelectDB()
     {
         if ($this->isConnected) {
-            return $this->DB->select_db($this->ReadPropertyString('Database'));
+            //return $this->DB->select_db($this->ReadPropertyString('Database'));
         }
         return true;
     }
@@ -70,7 +49,7 @@ trait Database
     protected function Logout()
     {
         if ($this->isConnected) {
-            return $this->DB->close();
+            //return $this->DB->close();
         }
         return false;
     }
@@ -150,7 +129,7 @@ trait Database
         /* @var $result mysqli_result */
         $result = $conn->query( $query );
         if ($result) {
-            $result = $this->DB->affected_rows;
+            //$result = $this->DB->affected_rows;
         }
         return $result;
     }
@@ -308,7 +287,7 @@ trait Database
             /* @var $result mysqli_result */
             $result = $conn->query( $query );
             if ($result === false) {
-                echo $this->DB->error;
+                //echo $this->DB->error;
                 return false;
             }
 
