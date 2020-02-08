@@ -38,23 +38,12 @@ trait Database
         try {
 			$serverName = $this->ReadPropertyString('Host');
             $database = $this->ReadPropertyString('Database');
-			$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			$conn = new PDO( "sqlsrv:server=$serverName;", NULL, NULL);   
 			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			$query = 'CREATE DATABASE ' . $database . '';
+			$result = $conn->query( $query );
 		}
 		catch( PDOException $e ) {
-			$codeNr = $e->getCode();
-             if ($codeNr == '08001') {
-                $query = 'CREATE DATABASE ' . $database . '';
-					try {
-						$result = $conn->query( $query );
-						}
-					catch( PDOException $err ) {
-						$codeNr = $err->getCode(); // Outputs: "28000"
-						if ($codeNr == '42S01') {
-							//echo "Wert schon vorhanden!";   
-						}
-					}  
-			}
 			return false;
 		}	 
         return true;
