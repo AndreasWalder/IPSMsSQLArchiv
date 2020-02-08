@@ -24,6 +24,7 @@ trait Database
      * @var mysqli
      */
     private $DB = null;
+	private $_conn = null;
 
     /**
      * @var bool
@@ -56,6 +57,7 @@ trait Database
      //Mit Windows Authentication:
       $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
       $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	  $_conn = $conn;
    }
    catch( PDOException $e ) {
       trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
@@ -95,13 +97,13 @@ trait Database
             return false;
         }
         //$query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
-		$serverName = "ANDREASPC\SQLEXPRESS";
-        $database = "IPS";
+		//$serverName = "ANDREASPC\SQLEXPRESS";
+        //$database = "IPS";
 		try {
-        $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+        //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'SELECT id, value, timestamp FROM . $VarId .';
-		$result = $conn->query( $query );
+		$result = $_conn->query( $query );
 		trigger_error($this->Translate($result), E_USER_NOTICE);
         }
         catch( PDOException $e ) {
@@ -126,13 +128,11 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
                 break;
         }
-		$serverName = $this->ReadPropertyString('Host');
-        $database = "IPS";
-		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		//$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+		//$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		  try {
-			    $stmt = $conn->query( $query );
+			    $stmt = $_conn->query( $query );
 				}
 		  catch( PDOException $err ) {
 				$codeNr = $err->getCode(); // Outputs: "28000"
