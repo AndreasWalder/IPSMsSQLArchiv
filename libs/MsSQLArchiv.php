@@ -74,23 +74,27 @@ trait Database
         if (!$this->isConnected) {
             return false;
         }
-        //$query = 'SHOW TABLES IN ' . $this->ReadPropertyString('Database') . " LIKE  'var" . $VarId . "';";
-		//$serverName = "ANDREASPC\SQLEXPRESS";
-        //$database = "IPS";
-		//try {
-        //$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-        //$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		//$query = 'SELECT id, value, timestamp FROM . $VarId .';
-		//$result = $_conn->query( $query );
-		//trigger_error($this->Translate($result), E_USER_NOTICE);
-        //}
-        //catch( PDOException $e ) {
-        //   trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
-	    return true;
-        //}    
+        $serverName = $this->ReadPropertyString('Host');
+        $database = $this->ReadPropertyString('Database');
+		$table = $this->ReadPropertyString('Table');
+		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$Typ = 'value nvarchar(max), ';
+		$query = 'CREATE TABLE [' . $table . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
+		try {
+			 $stmt = $conn->query( $query );
+			}
+		catch( PDOException $err ) {
+		    $codeNr = $err->getCode();
+			if ($codeNr == '42S01') {
+			return true;
+			}
+			return false;
+		}  
+	    return true;  
     }
 
-    protected function CreateTable($VarId, $VarTyp)
+    protected function CreateAddToTable($VarId, $VarTyp)
     {
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:

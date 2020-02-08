@@ -14,7 +14,7 @@
             "Database connected.": "Datenbank verbunden.",
             "No connection.": "Keine Verbindung.",
             "Cannot connect to database.": "Fehler beim Verbinden zur Datenbank.",
-            "Error on create tables.": "Fehler beim erstellen der Tabellen.",
+            "Error on create table.": "Fehler beim erstellen der Tabelle.",
             "Create database failed.": "Erzeugen der Datenbank fehlgeschlagen.",
             "Object #%d not exists": "Objekt #%d existiert nicht",
             "Object #%d is no variable": "Object #%d ist keine Variable",

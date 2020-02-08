@@ -48,6 +48,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->RegisterPropertyString('Username', '');
         $this->RegisterPropertyString('Password', '');
         $this->RegisterPropertyString('Database', 'IPS');
+		$this->RegisterPropertyString('Table', '');
         $this->RegisterPropertyString('Variables', json_encode([]));
         $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
         $this->Vars = [];
@@ -125,9 +126,17 @@ class ArchiveControlMsSQL extends ipsmodule
             $this->SetStatus(IS_EBASE + 2);
             return;
         }
+		
+		if (!$this->TableExists()) {
+            echo $this->Translate('Error on create table.');
+            $this->SetStatus(IS_EBASE + 2);
+            return;
+        }
+		
+		
         
         foreach ($Vars as $VarId => $VarTyp) {
-			$this->CreateTable($VarId, $VarTyp);
+			$this->CreateAddToTable($VarId, $VarTyp);
 		}
 
         $this->SetStatus(IS_ACTIVE);
