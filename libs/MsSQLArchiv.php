@@ -1,22 +1,8 @@
 <?php
-
 declare(strict_types=1);
 
 require_once __DIR__  . '/../libs/helper/BufferHelper.php';
 require_once __DIR__  . '/../libs/helper/DebugHelper.php';
-
-/*
- * @addtogroup mysqlarchiv
- * @{
- *
- * @package       MySQLArchiv
- * @file          module.php
- * @author        Michael Tröger <micha@nall-chan.net>
- * @copyright     2019 Michael Tröger
- * @license       https://creativecommons.org/licenses/by-nc-sa/4.0/ CC BY-NC-SA 4.0
- * @version       3.30
- *
- */
 
 trait Database
 {
@@ -24,7 +10,10 @@ trait Database
      * @var mysqli
      */
     private $DB = null;
-	private $conn = null;
+	public $conn = null;
+	
+	public $serverName = "ANDREASPC\SQLEXPRESS";
+    public $database = "IPS";
 
     /**
      * @var bool
@@ -40,8 +29,7 @@ trait Database
     //$serverName = $this->ReadPropertyString('Host');
     //$database = $this->ReadPropertyString('Database');
 	
-	$serverName = "ANDREASPC\SQLEXPRESS";
-    $database = "IPS";
+	
 
 
    // Benutzermame und Kennwort definieren
