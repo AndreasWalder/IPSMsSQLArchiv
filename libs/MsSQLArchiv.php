@@ -30,7 +30,7 @@ trait Database
     /**
      * @var bool
      */
-    private $isConnected = true;
+    private $isConnected = false;
 
     protected function Login()
     {
