@@ -143,10 +143,7 @@ class ArchiveControlMsSQL extends ipsmodule
 					$query = 'SELECT id, value, timestamp FROM . $VarId .';
 					$result = $conn->query( $query );
 				}
-					catch( PDOException $e ) {
-					trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
-					return true;
-					$result = false;
+					$this->CreateTable($VarId, $VarTyp);
 				}    
 		}
         if (!$Result) {
