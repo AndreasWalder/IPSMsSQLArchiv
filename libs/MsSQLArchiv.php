@@ -71,9 +71,6 @@ trait Database
 
     protected function TableExist()
     {
-        if (!$this->isConnected) {
-            return false;
-        }
         $serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
 		if ($this->ReadPropertyString('Table') == '') {
