@@ -38,8 +38,8 @@ trait Database
        return false;
       }
     //Server und Datenbank auswählen
-    $serverName = "ANDREASPC\SQLEXPRESS";
-    database = "DeviceCheckData";
+    $serverName = $this->ReadPropertyString('Host');
+    $database = $this->ReadPropertyString('Database');
 
    // Benutzermame und Kennwort definieren
    //$uid = "Andreas";
