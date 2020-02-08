@@ -133,7 +133,8 @@ trait Database
 		$VarIdWert = '1';
 		$date = date('Y-m-d H:i:s');
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
-		$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',' . $date . ')';
+		//$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',' . $date . ')';
+		$query = 'INSERT INTO [' . $table . '] (ParentId,LastUpdate) VALUES ([' . $VarId . '],' . $date . ')';
 		try {
 			 $stmt = $conn->query( $query );
 			}
