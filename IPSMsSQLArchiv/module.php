@@ -163,6 +163,7 @@ class ArchiveControlMsSQL extends ipsmodule
 					echo "Wert schon vorhanden!";   
 				}
 		    }  
+		}
         if (!$Result) {
             echo $this->Translate('Error on create tables.');
             $this->SetStatus(IS_EBASE + 3);
