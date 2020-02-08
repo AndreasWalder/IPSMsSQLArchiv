@@ -138,15 +138,15 @@ trait Database
 		$table = $this->ReadPropertyString('Table');	
 		$ParentId = $this->ReadPropertyInteger('ParentId');
 		$VarName = IPS_GetName($VarId);
-		$Test = 'KeyValue';
-		echo $VarName;
+		$VarName = iconv('UTF-8', 'UTF-16LE', $VarName); //convert into native encoding 
+		$VarName = bin2hex($VarName); //convert into hexadecimal
 		$VarIdWert = '1';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CAST('.$Test.' as nvarchar(MAX)),'.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),'.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		
-		$value = 'ŽČŘĚÝÁÖ';
-		$value = iconv('UTF-8', 'UTF-16LE', $value); //convert into native encoding 
-		$value = bin2hex($value); //convert into hexadecimal
-		$query = 'INSERT INTO ['.$table.'] (KeyValue)  VALUES(CONVERT(nvarchar(MAX), 0x'.$value.'))'; 
+		//$value = 'ŽČŘĚÝÁÖ';
+		//$value = iconv('UTF-8', 'UTF-16LE', $value); //convert into native encoding 
+		//$value = bin2hex($value); //convert into hexadecimal
+		//$query = 'INSERT INTO ['.$table.'] (KeyValue)  VALUES(CONVERT(nvarchar(MAX), 0x'.$value.'))'; 
 		
 		
 		try {
