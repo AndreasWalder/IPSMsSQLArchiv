@@ -111,7 +111,6 @@ trait Database
 
     protected function CreateAddToTable($VarId, $VarTyp)
     {
-		echo $this->Translate('Done');
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
                 $Typ = 'value INT, ';
@@ -126,6 +125,7 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
                 break;
         }
+		echo $this->Translate('Versuch1');
 		$serverName = $this->ReadPropertyString('Host');
         $database = $this->ReadPropertyString('Database');
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
@@ -136,6 +136,7 @@ trait Database
 		$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ' . $VarIdWert . ', ' . $VarIdWert . ',[' . $VarIdWert . '],' . $VarIdWert . ',NOW())';
 		try {
 			 $stmt = $conn->query( $query );
+			 echo $this->Translate('Done');
 			}
 		catch( PDOException $err ) {
 			echo $this->$err;
