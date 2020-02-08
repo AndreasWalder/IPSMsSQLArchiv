@@ -138,7 +138,7 @@ trait Database
 		$table = $this->ReadPropertyString('Table');	
 		$ParentId = $this->ReadPropertyInteger('ParentId');
 		$VarName = IPS_GetName($VarId);
-		$Test = str_split('Hallo');
+		$Test = iconv('UCS-2LE', 'UTF-8', 'Hallo');
 		echo $VarName;
 		$VarIdWert = '1';
 		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('.$ParentId.','.$VarId.','.$Test.','.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
