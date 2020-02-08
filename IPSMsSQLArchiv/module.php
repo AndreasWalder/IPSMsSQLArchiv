@@ -27,7 +27,9 @@ class ArchiveControlMsSQL extends ipsmodule
         \BufferHelper,
         \DebugHelper,
         \Database,
-       
+        \VariableWatch, {
+        \Semaphore::lock as Function;
+    }
     private $Runtime;
 
    public function __construct($InstanceID)
