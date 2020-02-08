@@ -359,11 +359,11 @@ class ArchiveControlMsSQL extends ipsmodule
       $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
    }
    catch( PDOException $e ) {
-      die( "Error connecting to SQL Server" );
+      trigger_error($this->Translate('NCannot connect to database.'), E_USER_NOTICE);
    } 
     //SQL Query
     $query = 'SELECT Code, Description FROM enumFunctions';
-
+    trigger_error($this->Translate('Database connected.'), E_USER_NOTICE);
     //Schleifendurchlauf
    $stmt = $conn->query( $query );
    while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
