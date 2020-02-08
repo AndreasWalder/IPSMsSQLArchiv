@@ -129,8 +129,10 @@ trait Database
         $database = $this->ReadPropertyString('Database');
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$table = $this->ReadPropertyString('Table');	
+		$VarIdWert = '1';
 		//$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
-		$query = 'INSERT INTO [' . $VarId . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ('12345', '232323', 'Test', 'Hallo','1','Volt','2020-02-08')'';
+		$query = 'INSERT INTO [' . $table . '] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES ([' . $VarId . '], [' . $VarId . '], ''Test'', ''Hallo'',[' . $VarIdWert . '],''Volt'',''2020-02-08'')'';
 		try {
 			 $stmt = $conn->query( $query );
 			}
