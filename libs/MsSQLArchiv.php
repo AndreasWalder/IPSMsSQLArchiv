@@ -22,9 +22,17 @@ require_once __DIR__  . '/../libs/helper/DebugHelper.php';
 
 trait Database
 {
+    /**
+     * @var mysqli
+     */
+    private $DB = null;
+
+    /**
+     * @var bool
+     */
     private $isConnected = false;
 
-   function Login()
+    protected function Login()
     {
       if ($this->ReadPropertyString('Host') == '') {
        return false;
@@ -310,14 +318,14 @@ trait Database
         }
 }
 
-function VariableWatch()
+trait VariableWatch
 {
     /**
      * Deregistriert eine Überwachung einer Variable.
      *
      * @param int $VarId IPS-ID der Variable.
      */
-    function UnregisterVariableWatch($VarId)
+    protected function UnregisterVariableWatch($VarId)
     {
         if ($VarId == 0) {
             return;
@@ -334,7 +342,7 @@ function VariableWatch()
      *
      * @param int $VarId IPS-ID der Variable.
      */
-    function RegisterVariableWatch(int $VarId)
+    protected function RegisterVariableWatch(int $VarId)
     {
         if ($VarId == 0) {
             return;
@@ -345,4 +353,5 @@ function VariableWatch()
         $this->RegisterMessage($VarId, VM_UPDATE);
     }
 }
+
 /* @} */
