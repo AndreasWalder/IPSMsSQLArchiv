@@ -142,6 +142,13 @@ trait Database
 		echo $VarName;
 		$VarIdWert = '1';
 		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CAST('.$Test.' as nvarchar(MAX)),'.$VarIdWert.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		
+		$value = 'ŽČŘĚÝÁÖ';
+		$value = iconv('UTF-8', 'UTF-16LE', $value); //convert into native encoding 
+		$value = bin2hex($value); //convert into hexadecimal
+		$query = 'INSERT INTO ['.$table.'] (KeyValue)  VALUES(CONVERT(nvarchar(MAX), 0x'.$value.'))'; 
+		
+		
 		try {
 			 $stmt = $conn->query( $query );
 			}
