@@ -23,12 +23,12 @@ require_once __DIR__  . '/../libs/helper/SemaphoreHelper.php';
  */
 class ArchiveControlMySQL extends ipsmodule
 {
-    use \MsSqlArchive\Semaphore,
-        \MsSqlArchive\BufferHelper,
-        \MsSqlArchive\DebugHelper,
-        \MsSqlArchive\Database,
-        \MsSqlArchive\VariableWatch {
-        \MsSqlArchive\Semaphore::lock as TraitLock;
+    use \Semaphore,
+        \BufferHelper,
+        \DebugHelper,
+        \Database,
+        \VariableWatch {
+        \Semaphore::lock as TraitLock;
     }
     private $Runtime;
 
