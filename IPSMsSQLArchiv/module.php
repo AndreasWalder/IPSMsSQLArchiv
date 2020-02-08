@@ -32,7 +32,7 @@ class ArchiveControlMySQL extends ipsmodule
     }
     private $Runtime;
 
-   public function __construct($InstanceID)
+    public function __construct($InstanceID)
     {
         $this->Runtime = microtime(true);
         parent::__construct($InstanceID);
