@@ -155,17 +155,17 @@ class ArchiveControlMsSQL extends ipsmodule
         $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
         $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
-    
-			try {
-				$stmt = $conn->query( $query );
+        }
+		  try {
+			    $stmt = $conn->query( $query );
 				}
-				catch( PDOException $err ) {
+		  catch( PDOException $err ) {
 				$codeNr = $err->getCode(); // Outputs: "28000"
 				if ($codeNr == '42S01') {
 					echo "Wert schon vorhanden!";   
 				}
-				} 
-				$result = $conn->query( $query );
+		    } 
+		  $result = $conn->query( $query );
 		}
         catch( PDOException $e ) {
            trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
