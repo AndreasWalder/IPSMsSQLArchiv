@@ -16,6 +16,7 @@
             "Cannot connect to database.": "Fehler beim Verbinden zur Datenbank.",
             "Error on create table.": "Fehler beim erstellen der Tabelle.",
 			"Table has no name.": "Tabelle hat keinen Namen.",
+			"ParentId has no name.": "ParentId hat keinen Namen.",
             "Create database failed.": "Erzeugen der Datenbank fehlgeschlagen.",
             "Object #%d not exists": "Objekt #%d existiert nicht",
             "Object #%d is no variable": "Object #%d ist keine Variable",
