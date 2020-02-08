@@ -151,11 +151,9 @@ class ArchiveControlMsSQL extends ipsmodule
         }
 		$serverName = "ANDREASPC\SQLEXPRESS";
         $database = "IPS";
-        try {
-			$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
-			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-			$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
-        }
+		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$query = 'CREATE TABLE [' . $VarId . '] (id BIGINT PRIMARY KEY, ' . $Typ . 'timestamp DATETIME)';
 		  try {
 			    $stmt = $conn->query( $query );
 				}
@@ -164,12 +162,7 @@ class ArchiveControlMsSQL extends ipsmodule
 				if ($codeNr == '42S01') {
 					echo "Wert schon vorhanden!";   
 				}
-		    } 
-		  $result = $conn->query( $query );
-        catch( PDOException $e ) {
-           trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
-	       return false;
-        }    
+		    }  
         if (!$Result) {
             echo $this->Translate('Error on create tables.');
             $this->SetStatus(IS_EBASE + 3);
