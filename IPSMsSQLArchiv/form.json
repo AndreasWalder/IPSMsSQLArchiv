@@ -84,6 +84,14 @@
 							"edit": {
 								"type": "ValidationTextBox"
 							}
+						}, {
+                            "caption": "Unit",
+                            "name": "Unit",
+                            "width": "auto",
+                            "add": "",
+							"edit": {
+								"type": "ValidationTextBox"
+							}
                         }, {
                             "caption": "First value",
                             "name": "FirstTimestamp",
