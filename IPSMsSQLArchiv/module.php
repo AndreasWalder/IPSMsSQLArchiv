@@ -181,7 +181,7 @@ class ArchiveControlMsSQL extends ipsmodule
 	
 	 public function Debug()
     {
-		echo 'Hallo';
+		ApplyChanges();
     }
 
     /**
