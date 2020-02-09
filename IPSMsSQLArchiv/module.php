@@ -103,8 +103,8 @@ class ArchiveControlMsSQL extends ipsmodule
 
         foreach ($ConfigVars as $Item) {
             $VarId = $Item['VariableId'];
-			//$Description = $Item['DescriptionText'];
-			echo $VarId;
+			$Description = $Item['DescriptionText'];
+			echo $Description;
             if ($VarId <= 0) {
                 continue;
             }
