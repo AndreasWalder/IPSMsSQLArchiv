@@ -155,14 +155,26 @@ trait Database
 		$VarName = iconv('UTF-8', 'UTF-16LE', $VarName); //convert into native encoding 
 		$VarName = bin2hex($VarName); //convert into hexadecimal
 		
-		
 		$Description = iconv('UTF-8', 'UTF-16LE', $Description); //convert into native encoding 
 	    $Description = bin2hex($Description); //convert into hexadecimal
 		
 		$Unit = iconv('UTF-8', 'UTF-16LE', $Unit); //convert into native encoding 
 		$Unit = bin2hex($Unit); //convert into hexadecimal
 		
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),'.$SqlValue.',CONVERT(nvarchar(MAX), 0x'.$Unit.'),GETDATE())';
+		$Typ = iconv('UTF-8', 'UTF-16LE', $Typ); //convert into native encoding 
+		$Typ = bin2hex($Typ); //convert into hexadecimal
+		
+		
+		
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,Typ,LastUpdate) 
+				  VALUES('.$ParentId.',
+				  '.$VarId.',
+				  CONVERT(nvarchar(MAX), 0x'.$VarName.'),
+				  CONVERT(nvarchar(MAX), 0x'.$Description.'),
+				  '.$SqlValue.',
+				  CONVERT(nvarchar(MAX), 0x'.$Unit.'),
+				  CONVERT(nvarchar(MAX), 0x'.$Typ.'),
+				  GETDATE())';
 		
 		try {
 			 $stmt = $conn->query( $query );
