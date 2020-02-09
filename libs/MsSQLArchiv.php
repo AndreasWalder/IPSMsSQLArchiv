@@ -387,7 +387,7 @@ trait Database
 			 $result = $stmt->fetch(PDO::FETCH_NAMED);
 			}
 		catch( PDOException $err ) {
-			echo $err;
+			//echo $err;
 			echo $this->Translate('Table not exists.');
 		    return false;
 		}  	
