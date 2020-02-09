@@ -120,7 +120,7 @@ trait Database
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
                 $Typ = 'value INT, ';
-				$SqlValue = $Value
+				$SqlValue = $Value;
                 break;
             case VARIABLETYPE_FLOAT:
                 $Typ = 'value REAL, ';
@@ -132,7 +132,7 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
 		        $Value = bin2hex($Value); //convert into hexadecimal
-				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')'
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
                 break;
         }
 		$serverName = $this->ReadPropertyString('Host');
