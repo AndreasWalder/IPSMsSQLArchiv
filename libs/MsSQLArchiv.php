@@ -153,7 +153,7 @@ trait Database
 		
 		
 		$VarIdWert = '1';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),'.$VarIdWert.',CONVERT(nvarchar(MAX), 0x'.$Unit.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),'.$VarIdWert.',CONVERT(nvarchar(MAX), 0x'.$Unit.'),GETDATE())';
 		//$value = 'ŽČŘĚÝÁÖ';
 		//$value = iconv('UTF-8', 'UTF-16LE', $value); //convert into native encoding 
 		//$value = bin2hex($value); //convert into hexadecimal
