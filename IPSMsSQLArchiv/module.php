@@ -56,7 +56,10 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->Buffer = [];
     }
 
-
+    /**
+     * Interne Funktion des SDK.
+     */
+	
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         //Time critical start
