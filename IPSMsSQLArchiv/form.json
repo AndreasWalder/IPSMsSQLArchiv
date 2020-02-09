@@ -131,7 +131,7 @@
 				{
                     "type": "Button",
                     "caption": "Test",
-                    "onClick": "this->ApplyChanges();"
+                    "onClick": "ApplyChanges();"
                 }
             ],
     "status":
