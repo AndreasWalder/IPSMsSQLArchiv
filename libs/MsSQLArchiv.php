@@ -129,6 +129,7 @@ trait Database
 			 while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
 			//Name auswählen und die Value anzeigen
 			echo "<option value='" . $row['ChildId'] . "'></option>";
+			 }
 			}
 		catch( PDOException $err ) {
 			echo $err;
