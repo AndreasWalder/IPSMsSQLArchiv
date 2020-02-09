@@ -131,7 +131,7 @@
 				{
                     "type": "Button",
                     "caption": "Test",
-                    "onClick": "$id"
+                    "onClick": "echo $id;"
                 }
             ],
     "status":
