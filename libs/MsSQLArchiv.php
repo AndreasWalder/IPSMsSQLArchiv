@@ -395,7 +395,7 @@ trait Database
 			$Unit = $result['Unit'];
 			
 			
-			print_r($result);
+			//print_r($result);
 		
 		
 			$Value = $NewValue;
