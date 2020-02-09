@@ -79,7 +79,7 @@
 						}, {
                             "caption": "Description",
                             "name": "DescriptionId",
-                            "width": "auto",
+                            "width": "500px",
                             "add": "",
 							"edit": {
 								"type": "ValidationTextBox"
@@ -87,7 +87,7 @@
 						}, {
                             "caption": "Unit",
                             "name": "Unit",
-                            "width": "auto",
+                            "width": "200px",
                             "add": "",
 							"edit": {
 								"type": "ValidationTextBox"
