@@ -135,13 +135,9 @@ class ArchiveControlMsSQL extends ipsmodule
             }
             $this->RegisterVariableWatch($VarId);
             $Vars[$VarId] = IPS_GetVariable($VarId)['VariableType'];
-			$this->CreateAddToTable($VarId, $Vars[$VarId], $Description, $Unit);
+			$Value = GetValue($VarId);
+			$this->CreateAddToTable($VarId, $Vars[$VarId], $Description, $Value, $Unit);
         }
-        
-        //foreach ($Vars as $VarId => $VarTyp) {
-		//	$Description = $Vars[$Description];
-		//	echo $Description;
-		//}
 
         $this->SetStatus(IS_ACTIVE);
         $this->Logout();
