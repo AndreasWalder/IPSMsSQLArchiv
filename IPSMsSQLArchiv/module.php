@@ -61,6 +61,8 @@ class ArchiveControlMsSQL extends ipsmodule
      */
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
+		echo $SenderID;
+		echo $Message;
         //Time critical start
         switch ($Message) {
             case VM_UPDATE:
