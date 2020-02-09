@@ -120,6 +120,7 @@ trait Database
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
                 $Typ = 'value INT, ';
+				$SqlValue = $Value
                 break;
             case VARIABLETYPE_FLOAT:
                 $Typ = 'value REAL, ';
@@ -131,6 +132,7 @@ trait Database
                 $Typ = 'value nvarchar(max), ';
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
 		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')'
                 break;
         }
 		$serverName = $this->ReadPropertyString('Host');
@@ -151,7 +153,7 @@ trait Database
 		$Unit = iconv('UTF-8', 'UTF-16LE', $Unit); //convert into native encoding 
 		$Unit = bin2hex($Unit); //convert into hexadecimal
 		
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),CONVERT(nvarchar(MAX), 0x'.$Value.'),CONVERT(nvarchar(MAX), 0x'.$Unit.'),GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),'.$SqlValue.',CONVERT(nvarchar(MAX), 0x'.$Unit.'),GETDATE())';
 		
 		try {
 			 $stmt = $conn->query( $query );
