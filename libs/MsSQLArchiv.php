@@ -119,7 +119,7 @@ trait Database
     protected function CreateAddToTable($VarId, $VarTyp, $Description, $Value, $Unit)
     {
 		$table = $this->ReadPropertyString('Table');	
-		$query = 'SELECT ChildId FROM ['.$table.'] WHERE (ChildId = '.$VarId.')';
+		$query = 'SELECT ChildId FROM ['.$table.']';
 		try {
 			 $stmt = $conn->query($query);
 			}
