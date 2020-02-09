@@ -143,7 +143,7 @@ trait Database
 		$VarName = bin2hex($VarName); //convert into hexadecimal
 		
 		$Description = iconv('UTF-8', 'UTF-16LE', $Description); //convert into native encoding 
-		//$Description = bin2hex($Description); //convert into hexadecimal
+		$Description = bin2hex($Description); //convert into hexadecimal
 		echo $Description;
 		$VarIdWert = '1';
 		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),'.$Description.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
