@@ -104,7 +104,6 @@ class ArchiveControlMsSQL extends ipsmodule
         foreach ($ConfigVars as $Item) {
             $VarId = $Item['VariableId'];
 			$Description = $Item['DescriptionText'];
-			echo $Description;
             if ($VarId <= 0) {
                 continue;
             }
@@ -116,6 +115,7 @@ class ArchiveControlMsSQL extends ipsmodule
             }
             $this->RegisterVariableWatch($VarId);
             $Vars[$VarId] = IPS_GetVariable($VarId)['VariableType'];
+			$Vars[$Description] = IPS_GetVariable($Description)['Description'];
         }
         $this->Vars = $Vars;
 
@@ -139,7 +139,8 @@ class ArchiveControlMsSQL extends ipsmodule
 		
         
         foreach ($Vars as $VarId => $VarTyp) {
-			$Description = '';
+			$Description = $Vars[$Description];
+			echo $Description;
 			$this->CreateAddToTable($VarId, $VarTyp, $Description);
 		}
 
