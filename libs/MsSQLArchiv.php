@@ -373,14 +373,27 @@ trait Database
 
     protected function WriteValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
-        if (!$HasChanged) {
+        if ($HasChanged) {
 			echo $Variable;
-			echo $NewValue;
-			echo $HasChanged;
-			echo $Timestamp;
+			//echo $NewValue;
+			//echo $HasChanged;
+			//echo $Timestamp;
             $query = 'SELECT id,value FROM var' . $Variable . ' ORDER BY timestamp DESC LIMIT 2';
             /* @var $result mysqli_result */
-            $result = $conn->query( $query );
+			try {
+			 $serverName = $this->ReadPropertyString('Host');
+			 $database = $this->ReadPropertyString('Database');
+			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			 $stmt = $conn->query($query);
+			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
+			 if ($result <> '') {return;}
+			 print_r($result);
+			}
+		catch( PDOException $err ) {
+			echo $err;
+		    return false;
+		}  	
             if ($result === false) {
                 //echo $this->DB->error;
                 return false;

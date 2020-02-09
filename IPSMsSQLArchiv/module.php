@@ -315,7 +315,6 @@ class ArchiveControlMsSQL extends ipsmodule
     private function LogValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
         $Vars = $this->Vars;
-		print_r($Vars);
         if (!array_key_exists($Variable, $Vars)) {
             return false;
         }
@@ -324,10 +323,6 @@ class ArchiveControlMsSQL extends ipsmodule
                 $result = $this->WriteValue($Variable, (int) $NewValue, $HasChanged, $Timestamp);
                 break;
             case VARIABLETYPE_INTEGER:
-			    //echo $Variable;
-	            //echo $NewValue;
-		        echo $HasChanged;
-		        //echo $Timestamp;
                 $result = $this->WriteValue($Variable, $NewValue, $HasChanged, $Timestamp);
                 break;
             case VARIABLETYPE_FLOAT:
