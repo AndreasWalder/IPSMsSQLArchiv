@@ -384,7 +384,7 @@ trait Database
 			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
-			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
+			 $result = $stmt->fetch(PDO::FETCH_BOTH );
 			 print_r($result);
 			}
 		catch( PDOException $err ) {
