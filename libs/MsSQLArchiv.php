@@ -128,7 +128,6 @@ trait Database
 			 $stmt = $conn->query($query);
 			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 			 print_r($result);
-			 }
 			}
 		catch( PDOException $err ) {
 			echo $err;
