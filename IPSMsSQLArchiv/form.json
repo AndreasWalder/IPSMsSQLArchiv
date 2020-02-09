@@ -79,7 +79,7 @@
 						}, {
                             "caption": "Description",
                             "name": "DescriptionId",
-                            "width": "500px",
+                            "width": "400px",
                             "add": "",
 							"edit": {
 								"type": "ValidationTextBox"
