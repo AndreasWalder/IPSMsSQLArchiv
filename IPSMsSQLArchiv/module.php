@@ -101,22 +101,6 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->Vars = [];
         $Vars = [];
 
-        foreach ($ConfigVars as $Item) {
-            $VarId = $Item['VariableId'];
-			$Description = $Item['DescriptionText'];
-            if ($VarId <= 0) {
-                continue;
-            }
-            if (!IPS_VariableExists($VarId)) {
-                continue;
-            }
-            if (array_key_exists($VarId, $Vars)) {
-                continue;
-            }
-            $this->RegisterVariableWatch($VarId);
-            $Vars[$VarId] = IPS_GetVariable($VarId)['VariableType'];
-			$Vars[$Description] = IPS_GetVariable($Description)['Description'];
-        }
         $this->Vars = $Vars;
 
         if ($this->ReadPropertyString('Host') == '') {
@@ -136,13 +120,27 @@ class ArchiveControlMsSQL extends ipsmodule
             return;
         }
 		
-		
+		foreach ($ConfigVars as $Item) {
+            $VarId = $Item['VariableId'];
+			$Description = $Item['DescriptionText'];
+            if ($VarId <= 0) {
+                continue;
+            }
+            if (!IPS_VariableExists($VarId)) {
+                continue;
+            }
+            if (array_key_exists($VarId, $Vars)) {
+                continue;
+            }
+            $this->RegisterVariableWatch($VarId);
+            $Vars[$VarId] = IPS_GetVariable($VarId)['VariableType'];
+			$this->CreateAddToTable($VarId, $Vars[$VarId], $Description);
+        }
         
-        foreach ($Vars as $VarId => $VarTyp) {
-			$Description = $Vars[$Description];
-			echo $Description;
-			$this->CreateAddToTable($VarId, $VarTyp, $Description);
-		}
+        //foreach ($Vars as $VarId => $VarTyp) {
+		//	$Description = $Vars[$Description];
+		//	echo $Description;
+		//}
 
         $this->SetStatus(IS_ACTIVE);
         $this->Logout();
