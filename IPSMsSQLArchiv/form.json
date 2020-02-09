@@ -122,18 +122,18 @@
                 }
             ],
     "actions":
-				"type": "RowLayout",
-                "items": [
-				{
+            [
+                {
                     "type": "Button",
                     "caption": "Create Highcharts Script",
                     "onClick": ""
                 },
 				{
                     "type": "Button",
-                    "caption": "Test Hinzufügen zur Tabelle",
-                    "onClick": ""
-                }],
+                    "caption": "Test",
+                    "onClick": "this->ApplyChanges();"
+                }
+            ],
     "status":
             [
                 {
