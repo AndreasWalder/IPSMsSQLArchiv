@@ -54,7 +54,22 @@ trait Database
     protected function SelectDB()
     {
         if ($this->isConnected) {
-            //return $this->DB->select_db($this->ReadPropertyString('Database'));
+			$table = $this->ReadPropertyString('Table');		
+		$query = 'SELECT Id,ParentId,ChildId,KeyValue,Description,Value,Unit,Typ,LastUpdate FROM ['.$table.']';
+		try {
+			 $serverName = $this->ReadPropertyString('Host');
+			 $database = $this->ReadPropertyString('Database');
+			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			 $stmt = $conn->query($query);
+			 $result = $stmt->fetch(PDO::FETCH_NAMED);
+			}
+		catch( PDOException $err ) {
+			//echo $err;
+			echo $this->Translate('Table not exists.');
+		    return false;
+		}  	
+            return $result;
         }
         return true;
     }

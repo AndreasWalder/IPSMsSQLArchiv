@@ -319,7 +319,7 @@ class ArchiveControlMsSQL extends ipsmodule
             return false;
         }
 		
-		$this->GetAggregationVariables(true);
+		$this->GetConfigurationForm();
 		
         switch ($Vars[$Variable]) {
             case VARIABLETYPE_BOOLEAN:
