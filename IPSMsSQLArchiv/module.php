@@ -52,8 +52,14 @@ class ArchiveControlMsSQL extends ipsmodule
 		$this->RegisterPropertyInteger("ParentId", 0);
         $this->RegisterPropertyString('Variables', json_encode([]));
         $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
+		$this->RegisterTimer("TestClick", 0, 'Test($_IPS[\'TARGET\']);');
         $this->Vars = [];
         $this->Buffer = [];
+    }
+	
+	 public function TestClick()
+    {
+		echo 'Hallo';
     }
 
     /**
@@ -61,8 +67,6 @@ class ArchiveControlMsSQL extends ipsmodule
      */
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
-		echo $SenderID;
-		echo $Message;
         //Time critical start
         switch ($Message) {
             case VM_UPDATE:
@@ -94,6 +98,7 @@ class ArchiveControlMsSQL extends ipsmodule
     public function ApplyChanges()
     {
         parent::ApplyChanges();
+		
 
         $ConfigVars = json_decode($this->ReadPropertyString('Variables'), true);
         $Vars = $this->Vars;
