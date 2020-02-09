@@ -139,7 +139,7 @@ trait Database
 				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
                 break;
             case VARIABLETYPE_STRING:
-                $Typ = 'nvarchar(max)';
+                $Typ = 'STRING';
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
 		        $Value = bin2hex($Value); //convert into hexadecimal
 				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
