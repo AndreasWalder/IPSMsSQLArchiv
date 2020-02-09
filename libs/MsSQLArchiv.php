@@ -115,7 +115,7 @@ trait Database
 		
     }
 
-    protected function CreateAddToTable($VarId, $VarTyp, $Description)
+    protected function CreateAddToTable($VarId, $VarTyp, $Description, $Unit)
     {
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
@@ -142,11 +142,18 @@ trait Database
 		$VarName = iconv('UTF-8', 'UTF-16LE', $VarName); //convert into native encoding 
 		$VarName = bin2hex($VarName); //convert into hexadecimal
 		
+		
 		$Description = iconv('UTF-8', 'UTF-16LE', $Description); //convert into native encoding 
-		$Description = bin2hex($Description); //convert into hexadecimal
+	    $Description = bin2hex($Description); //convert into hexadecimal
+		
+		$Unit = iconv('UTF-8', 'UTF-16LE', $Unit); //convert into native encoding 
+		$Unit = bin2hex($Unit); //convert into hexadecimal
+		
+		
+		
 		
 		$VarIdWert = '1';
-		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),'.$VarIdWert.','.$VarIdWert.',GETDATE())';
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),'.$VarIdWert.',CONVERT(nvarchar(MAX), 0x'.$Unit.',GETDATE())';
 		//$value = 'ŽČŘĚÝÁÖ';
 		//$value = iconv('UTF-8', 'UTF-16LE', $value); //convert into native encoding 
 		//$value = bin2hex($value); //convert into hexadecimal
