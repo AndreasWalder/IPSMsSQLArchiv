@@ -56,24 +56,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->Buffer = [];
     }
 
-    /**
-     * Interne Funktion des SDK.
-     */
-	public function RequestAction($Ident, $Value) {
-  echo $Ident;
-    switch($Ident) {
-        case "TestVariable":
-            //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
-            //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
- 
-            //Neuen Wert in die Statusvariable schreiben
-            SetValue($this->GetIDForIdent($Ident), $Value);
-            break;
-        default:
-            throw new Exception("Invalid Ident");
-    }
- 
-}
+
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         //Time critical start
