@@ -313,7 +313,7 @@ class ArchiveControlMsSQL extends ipsmodule
 		echo $Timestamp;
 		
         $Vars = $this->Vars;
-		echo $Vars;
+		print_r($Vars);
         if (!array_key_exists($Variable, $Vars)) {
             return false;
         }
