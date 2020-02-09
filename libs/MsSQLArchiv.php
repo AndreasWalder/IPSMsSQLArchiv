@@ -377,14 +377,14 @@ trait Database
         if ($HasChanged) {
 			
 		$table = $this->ReadPropertyString('Table');		
-		$query = 'SELECT ChildId FROM ['.$table.'] WHERE (ChildId = '.$Variable.')';
+		$query = 'SELECT Id,ParentId,ChildId,KeyValue,Description,Value,Unit,Typ,LastUpdate FROM ['.$table.'] WHERE (ChildId = '.$Variable.')';
 		try {
 			 $serverName = $this->ReadPropertyString('Host');
 			 $database = $this->ReadPropertyString('Database');
 			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
-			 $result = $stmt->fetch(PDO::FETCH_BOTH );
+			 $result = $stmt->fetch(PDO::FETCH_NAMED);
 			 print_r($result);
 			}
 		catch( PDOException $err ) {
