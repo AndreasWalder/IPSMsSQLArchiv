@@ -125,7 +125,7 @@ trait Database
             case VARIABLETYPE_FLOAT:
                 $Typ = 'value REAL, ';
 				echo $Value;
-				$Test = strval(new $Value);
+				$Test = strval($Value);
 				echo $Test;
 				return;
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
