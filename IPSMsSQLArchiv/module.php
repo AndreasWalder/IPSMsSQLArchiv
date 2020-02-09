@@ -59,6 +59,24 @@ class ArchiveControlMsSQL extends ipsmodule
     /**
      * Interne Funktion des SDK.
      */
+	public function RequestAction($Ident, $Value) {
+ 
+		switch($Ident) {
+			echo $Ident;
+			case "TestVariable":
+				//Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
+				//Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet	
+ 
+				//Neuen Wert in die Statusvariable schreiben
+				SetValue($this->GetIDForIdent($Ident), $Value);
+				break;
+			default:
+				throw new Exception("Invalid Ident");
+		}
+	}
+ 
+ 
+ 
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         //Time critical start
@@ -80,7 +98,7 @@ class ArchiveControlMsSQL extends ipsmodule
                 $Vars = $this->Vars;
                 unset($Vars[$SenderID]);
                 $this->Vars = $Vars;
-                break;
+                breakRequestAction
         }
         $this->SendDebug('MessageTime [' . $_IPS['THREAD'] . ']', sprintf('%.3f', ((microtime(true) - $this->Runtime) * 1000)) . ' ms', 0);
         //Time critical end
