@@ -385,7 +385,6 @@ trait Database
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
 			 $result = $stmt->fetch(PDO::FETCH_NAMED);
-			 print_r($result);
 			}
 		catch( PDOException $err ) {
 			echo $err;
@@ -393,6 +392,7 @@ trait Database
 		}  	
 		
 		    foreach ($result as $Item) {
+			print_r($Item);
             //$Item['VariableID'] = (int) $Item['VariableID'];
 			$VarTyp = $Item['Typ'];
 			echo $VarTyp;
