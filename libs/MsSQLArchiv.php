@@ -141,10 +141,10 @@ trait Database
 		$VarName = IPS_GetName($VarId);
 		$VarName = iconv('UTF-8', 'UTF-16LE', $VarName); //convert into native encoding 
 		$VarName = bin2hex($VarName); //convert into hexadecimal
-		
+		echo 'Test: ' . $Description;
 		$Description = iconv('UTF-8', 'UTF-16LE', $Description); //convert into native encoding 
-		$Description = bin2hex($Description); //convert into hexadecimal
-		echo $Description;
+		//$Description = bin2hex($Description); //convert into hexadecimal
+		echo 'Test2: ' . $Description;
 		$VarIdWert = '1';
 		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),'.$Description.','.$VarIdWert.','.$VarIdWert.',GETDATE())';
 		//$value = 'ŽČŘĚÝÁÖ';
