@@ -174,7 +174,6 @@ class ArchiveControlMsSQL extends ipsmodule
             //echo $this->DB->error;
             return;
         }
-		print_r($Buffer);
         foreach ($Buffer as $Data) {
             $Runtime = microtime(true);
             $this->LogValue($Data[0], $Data[1], $Data[2], $Data[3]);
@@ -320,17 +319,15 @@ class ArchiveControlMsSQL extends ipsmodule
         if (!array_key_exists($Variable, $Vars)) {
             return false;
         }
-		
-		echo $Variable;
-	    echo $NewValue;
-		echo $HasChanged;
-		echo $Timestamp;
-		
         switch ($Vars[$Variable]) {
             case VARIABLETYPE_BOOLEAN:
                 $result = $this->WriteValue($Variable, (int) $NewValue, $HasChanged, $Timestamp);
                 break;
             case VARIABLETYPE_INTEGER:
+			    //echo $Variable;
+	            //echo $NewValue;
+		        echo $HasChanged;
+		        //echo $Timestamp;
                 $result = $this->WriteValue($Variable, $NewValue, $HasChanged, $Timestamp);
                 break;
             case VARIABLETYPE_FLOAT:
