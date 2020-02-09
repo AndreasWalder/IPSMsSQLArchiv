@@ -76,6 +76,14 @@
                             "edit": {
                                 "type": "SelectVariable"
                             }
+						}, {
+                            "caption": "Description",
+                            "name": "DescriptionId",
+                            "width": "auto",
+                            "add": true,
+							"edit": {
+								"type": "ValidationTextBox"
+							}
                         }, {
                             "caption": "First value",
                             "name": "FirstTimestamp",
