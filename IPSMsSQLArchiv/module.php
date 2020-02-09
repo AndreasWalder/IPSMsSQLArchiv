@@ -141,6 +141,8 @@ class ArchiveControlMsSQL extends ipsmodule
 			$Value = GetValue($VarId);
 			$this->CreateAddToTable($VarId, $Vars[$VarId], $Description, $Value, $Unit);
         }
+		
+		$this->GetConfigurationForm();
 
         $this->SetStatus(IS_ACTIVE);
         $this->Logout();
