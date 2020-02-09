@@ -132,7 +132,10 @@ trait Database
             case VARIABLETYPE_BOOLEAN:
                 $Typ = 'value BIT, ';
 				$Value = $Value ? 'true' : 'false';
-				$SqlValue = $Value;
+				$Value = strval($Value);
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
                 break;
             case VARIABLETYPE_STRING:
                 $Typ = 'value nvarchar(max), ';
