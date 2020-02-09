@@ -6,6 +6,7 @@
             "Username": "Benutzername",
             "Password": "Passwort",
 			"Table": "Tabelle",
+			"Description": "Beschreibung",
             "Variable ID": "Variablen ID",
             "First value": "Erster Wert",
             "Last value": "Letzter Wert",

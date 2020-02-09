@@ -71,7 +71,7 @@
                         }, {
                             "caption": "Variable",
                             "name": "VariableId",
-                            "width": "auto",
+                            "width": "250px",
                             "add": 0,
                             "edit": {
                                 "type": "SelectVariable"
@@ -80,7 +80,7 @@
                             "caption": "Description",
                             "name": "DescriptionId",
                             "width": "auto",
-                            "add": true,
+                            "add": "",
 							"edit": {
 								"type": "ValidationTextBox"
 							}
