@@ -373,41 +373,91 @@ trait Database
 
     protected function WriteValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
+		
         if ($HasChanged) {
-			echo $Variable;
-			//echo $NewValue;
-			//echo $HasChanged;
-			//echo $Timestamp;
-            $query = 'SELECT id,value FROM var' . $Variable . ' ORDER BY timestamp DESC LIMIT 2';
-            /* @var $result mysqli_result */
-			try {
+			
+		$table = $this->ReadPropertyString('Table');		
+		$query = 'SELECT ChildId FROM ['.$table.'] WHERE (ChildId = '.$Variable.')';
+		try {
 			 $serverName = $this->ReadPropertyString('Host');
 			 $database = $this->ReadPropertyString('Database');
 			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
 			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-			 if ($result <> '') {return;}
 			 print_r($result);
 			}
 		catch( PDOException $err ) {
 			echo $err;
 		    return false;
 		}  	
-            if ($result === false) {
-                //echo $this->DB->error;
-                return false;
-            }
-
-            if ($result->num_rows === 2) {
-                $ids = $result->fetch_all(MYSQLI_ASSOC);
-                if ($ids[0]['value'] === $ids[1]['value']) {
-                    $query = 'UPDATE var' . $Variable . ' SET timestamp=from_unixtime(' . $Timestamp . ') WHERE id=' . $ids[0]['id'];
-                    $result = $conn->query( $query );
-                    return $result;
-                }
-            }
+			
+			return;
+			
+			$Value = $NewValue;
+			switch ($VarTyp) {
+            case VARIABLETYPE_INTEGER:
+                $Typ = 'INT';
+				$SqlValue = $Value;
+                break;
+            case VARIABLETYPE_FLOAT:
+                $Typ = 'REAL';
+				$Value = strval($Value);
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
+                break;
+            case VARIABLETYPE_BOOLEAN:
+                $Typ = 'BIT';
+				$Value = $Value ? 'true' : 'false';
+				$Value = strval($Value);
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
+                break;
+            case VARIABLETYPE_STRING:
+                $Typ = 'STRING';
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
+                break;
         }
+		$ParentId = $this->ReadPropertyInteger('ParentId');
+		
+		$VarName = IPS_GetName($Variable);
+		$VarName = iconv('UTF-8', 'UTF-16LE', $VarName); //convert into native encoding 
+		$VarName = bin2hex($VarName); //convert into hexadecimal
+		
+		$Description = iconv('UTF-8', 'UTF-16LE', $Description); //convert into native encoding 
+	    $Description = bin2hex($Description); //convert into hexadecimal
+		
+		$Unit = iconv('UTF-8', 'UTF-16LE', $Unit); //convert into native encoding 
+		$Unit = bin2hex($Unit); //convert into hexadecimal
+		
+		$Typ = iconv('UTF-8', 'UTF-16LE', $Typ); //convert into native encoding 
+		$Typ = bin2hex($Typ); //convert into hexadecimal
+		
+		
+		
+		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,Typ,LastUpdate) 
+				  VALUES('.$ParentId.',
+				  '.$Variable.',
+				  CONVERT(nvarchar(MAX), 0x'.$VarName.'),
+				  CONVERT(nvarchar(MAX), 0x'.$Description.'),
+				  '.$SqlValue.',
+				  CONVERT(nvarchar(MAX), 0x'.$Unit.'),
+				  CONVERT(nvarchar(MAX), 0x'.$Typ.'),
+				  GETDATE())';
+		try {
+			 $stmt = $conn->query( $query );
+			}
+		catch( PDOException $err ) {
+			echo $err;
+		    return false;
+		}  
+		return true;
+			
+		}
 }
 
 protected function UnregisterVariableWatch($VarId)
