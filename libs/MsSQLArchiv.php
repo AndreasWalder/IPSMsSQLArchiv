@@ -126,12 +126,14 @@ trait Database
 			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
+			 while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ){
+			//Name auswählen und die Value anzeigen
+			echo "<option value='" . $row['ChildId'] . "'></option>";
 			}
 		catch( PDOException $err ) {
 			echo $err;
 		    return false;
 		}  	
-		echo $stmt;	
 		return true;
 		
         switch ($VarTyp) {
