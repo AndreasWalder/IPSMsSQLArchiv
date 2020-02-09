@@ -390,12 +390,12 @@ trait Database
 			echo $err;
 		    return false;
 		}  	
-		    $VarTyp = $result['Typ'];
+		    $Typ = $result['Typ'];
 			$Description = $result['Description'];
 			$Unit = $result['Unit'];
 			
 			
-			print_r($result);
+			//print_r($result);
 		
 		
 			$Value = $NewValue;
