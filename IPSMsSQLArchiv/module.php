@@ -307,7 +307,13 @@ class ArchiveControlMsSQL extends ipsmodule
      */
     private function LogValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
+		echo $Variable;
+	    echo $NewValue;
+		echo $HasChanged;
+		echo $Timestamp;
+		
         $Vars = $this->Vars;
+		echo $Vars;
         if (!array_key_exists($Variable, $Vars)) {
             return false;
         }
