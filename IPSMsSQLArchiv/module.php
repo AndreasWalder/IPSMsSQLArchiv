@@ -174,6 +174,7 @@ class ArchiveControlMsSQL extends ipsmodule
             //echo $this->DB->error;
             return;
         }
+		print_r($Buffer);
         foreach ($Buffer as $Data) {
             $Runtime = microtime(true);
             $this->LogValue($Data[0], $Data[1], $Data[2], $Data[3]);
