@@ -126,9 +126,8 @@ trait Database
 			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
-			 while ( $row = $stmt->fetch( PDO::FETCH_NAMED ) ){
-			//Name auswählen und die Value anzeigen
-			echo "<option value='" . $row['ChildId'] . "'></option>";
+			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
+			 print_r($result);
 			 }
 			}
 		catch( PDOException $err ) {
