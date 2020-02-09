@@ -395,11 +395,37 @@ trait Database
 			$Unit = $result['Unit'];
 			
 			
-			//print_r($result);
+			print_r($result);
 		
 		
 			$Value = $NewValue;
-			
+			switch ($Typ) {
+            case 'INT':
+                $Typ = 'INT';
+				$SqlValue = $Value;
+                break;
+            case 'REAL':
+                $Typ = 'REAL';
+				$Value = strval($Value);
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
+                break;
+            case 'BIT';:
+                $Typ = 'BIT';
+				$Value = $Value ? 'true' : 'false';
+				$Value = strval($Value);
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
+                break;
+            case 'STRING':
+                $Typ = 'STRING';
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
+                break;
+        }
 		$ParentId = $this->ReadPropertyInteger('ParentId');
 		
 		$VarName = IPS_GetName($Variable);
