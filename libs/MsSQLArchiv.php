@@ -127,14 +127,13 @@ trait Database
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
 			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-			 //if ($result <> '') {return;}
+			 if ($result <> '') {return;}
 			 print_r($result);
 			}
 		catch( PDOException $err ) {
 			echo $err;
 		    return false;
 		}  	
-		return true;
 		
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
