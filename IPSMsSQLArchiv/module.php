@@ -319,6 +319,12 @@ class ArchiveControlMsSQL extends ipsmodule
         if (!array_key_exists($Variable, $Vars)) {
             return false;
         }
+		
+		echo $Variable;
+	    echo $NewValue;
+		echo $HasChanged;
+		echo $Timestamp;
+		
         switch ($Vars[$Variable]) {
             case VARIABLETYPE_BOOLEAN:
                 $result = $this->WriteValue($Variable, (int) $NewValue, $HasChanged, $Timestamp);
