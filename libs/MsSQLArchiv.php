@@ -391,18 +391,13 @@ trait Database
 		    return false;
 		}  	
 		    $VarTyp = $result['Typ'];
-			print_r($VarTyp);
+			$Description = $result['Description'];
+			$Unit = $result['Unit'];
 			
 			
-		    foreach ($result as $Item) {
-			//print_r($Item);
-            //$Item['VariableID'] = (int) $Item['VariableID'];
-			
-			}
-			
-			
-			return;
-			
+			print_r($result);
+		
+		
 			$Value = $NewValue;
 			switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
