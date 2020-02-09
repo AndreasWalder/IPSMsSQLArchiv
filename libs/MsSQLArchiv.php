@@ -411,7 +411,7 @@ trait Database
 		        $Value = bin2hex($Value); //convert into hexadecimal
 				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
                 break;
-            case 'BIT';:
+            case 'BIT':
                 $Typ = 'BIT';
 				$Value = $Value ? 'true' : 'false';
 				$Value = strval($Value);
