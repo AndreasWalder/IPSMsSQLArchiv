@@ -115,7 +115,7 @@ trait Database
 		
     }
 
-    protected function CreateAddToTable($VarId, $VarTyp)
+    protected function CreateAddToTable($VarId, $VarTyp, $Description)
     {
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:

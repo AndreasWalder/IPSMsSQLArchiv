@@ -103,6 +103,8 @@ class ArchiveControlMsSQL extends ipsmodule
 
         foreach ($ConfigVars as $Item) {
             $VarId = $Item['VariableId'];
+			$Description = $Item['DescriptionText'];
+			echo $Description;
             if ($VarId <= 0) {
                 continue;
             }
@@ -137,7 +139,7 @@ class ArchiveControlMsSQL extends ipsmodule
 		
         
         foreach ($Vars as $VarId => $VarTyp) {
-			$this->CreateAddToTable($VarId, $VarTyp);
+			$this->CreateAddToTable($VarId, $VarTyp, $Description);
 		}
 
         $this->SetStatus(IS_ACTIVE);

@@ -78,7 +78,7 @@
                             }
 						}, {
                             "caption": "Description",
-                            "name": "DescriptionId",
+                            "name": "DescriptionText",
                             "width": "400px",
                             "add": "",
 							"edit": {
