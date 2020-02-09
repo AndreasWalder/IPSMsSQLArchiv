@@ -59,7 +59,6 @@ class ArchiveControlMsSQL extends ipsmodule
     /**
      * Interne Funktion des SDK.
      */
-	
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         //Time critical start
@@ -81,7 +80,7 @@ class ArchiveControlMsSQL extends ipsmodule
                 $Vars = $this->Vars;
                 unset($Vars[$SenderID]);
                 $this->Vars = $Vars;
-                breakRequestAction
+                break;
         }
         $this->SendDebug('MessageTime [' . $_IPS['THREAD'] . ']', sprintf('%.3f', ((microtime(true) - $this->Runtime) * 1000)) . ' ms', 0);
         //Time critical end
