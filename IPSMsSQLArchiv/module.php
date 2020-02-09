@@ -57,7 +57,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->Buffer = [];
     }
 	
-	 public function TestClick()
+	 public function Test()
     {
 		echo 'Hallo';
     }
