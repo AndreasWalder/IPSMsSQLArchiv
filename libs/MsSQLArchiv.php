@@ -95,6 +95,7 @@ trait Database
 			[Description] [nvarchar](max) NULL,
 			[Value] [nvarchar](max) NULL,
 			[Unit] [nvarchar](20) NULL,
+			[Typ] [nvarchar](20) NULL,
 			[LastUpdate] [datetime] NULL)';
 			
 		try {
@@ -119,18 +120,18 @@ trait Database
     {
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
-                $Typ = 'value INT, ';
+                $Typ = 'INT';
 				$SqlValue = $Value;
                 break;
             case VARIABLETYPE_FLOAT:
-                $Typ = 'value REAL, ';
+                $Typ = 'REAL';
 				$Value = strval($Value);
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
 		        $Value = bin2hex($Value); //convert into hexadecimal
 				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
                 break;
             case VARIABLETYPE_BOOLEAN:
-                $Typ = 'value BIT, ';
+                $Typ = 'BIT';
 				$Value = $Value ? 'true' : 'false';
 				$Value = strval($Value);
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
@@ -138,7 +139,7 @@ trait Database
 				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
                 break;
             case VARIABLETYPE_STRING:
-                $Typ = 'value nvarchar(max), ';
+                $Typ = 'nvarchar(max)';
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
 		        $Value = bin2hex($Value); //convert into hexadecimal
 				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
