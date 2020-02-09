@@ -124,10 +124,7 @@ trait Database
                 break;
             case VARIABLETYPE_FLOAT:
                 $Typ = 'value REAL, ';
-				echo $Value;
 				$Test = strval($Value);
-				echo $Test;
-				return;
 				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
 		        $Value = bin2hex($Value); //convert into hexadecimal
 				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
