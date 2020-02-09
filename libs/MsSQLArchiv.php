@@ -118,7 +118,7 @@ trait Database
 
     protected function CreateAddToTable($VarId, $VarTyp, $Description, $Value, $Unit)
     {
-		$query = 'SELECT ChildId FROM ['.$table.'] WHERE (ChildId = '.$VarId.')'
+		$query = 'SELECT ChildId FROM ['.$table.'] WHERE (ChildId = '.$VarId.')';
 		try {
 			 $stmt = $conn->query($query);
 			}
