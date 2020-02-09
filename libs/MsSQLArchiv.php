@@ -131,6 +131,7 @@ trait Database
                 break;
             case VARIABLETYPE_BOOLEAN:
                 $Typ = 'value BIT, ';
+				$SqlValue = $Value;
                 break;
             case VARIABLETYPE_STRING:
                 $Typ = 'value nvarchar(max), ';
