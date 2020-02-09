@@ -373,12 +373,11 @@ trait Database
 
     protected function WriteValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
-		echo $Variable;
+        if (!$HasChanged) {
+			echo $Variable;
 			echo $NewValue;
 			echo $HasChanged;
 			echo $Timestamp;
-        if (!$HasChanged) {
-			return;
             $query = 'SELECT id,value FROM var' . $Variable . ' ORDER BY timestamp DESC LIMIT 2';
             /* @var $result mysqli_result */
             $result = $conn->query( $query );

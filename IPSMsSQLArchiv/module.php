@@ -143,15 +143,6 @@ class ArchiveControlMsSQL extends ipsmodule
             $VarId = $Item['VariableId'];
 			$Description = $Item['DescriptionText'];
 			$Unit = $Item['Unit'];
-            if ($VarId <= 0) {
-                continue;
-            }
-            if (!IPS_VariableExists($VarId)) {
-                continue;
-            }
-            if (array_key_exists($VarId, $Vars)) {
-                continue;
-            }
             $this->RegisterVariableWatch($VarId);
             $Vars[$VarId] = IPS_GetVariable($VarId)['VariableType'];
 			$Value = GetValue($VarId);
@@ -323,11 +314,6 @@ class ArchiveControlMsSQL extends ipsmodule
      */
     private function LogValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
-		echo $Variable;
-	    echo $NewValue;
-		echo $HasChanged;
-		echo $Timestamp;
-		
         $Vars = $this->Vars;
 		print_r($Vars);
         if (!array_key_exists($Variable, $Vars)) {
