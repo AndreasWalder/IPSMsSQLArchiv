@@ -54,7 +54,7 @@ trait Database
     protected function SelectDB()
     {
         if ($this->isConnected) {
-			$table = $this->ReadPropertyString('Table');		
+		$table = $this->ReadPropertyString('Table');		
 		$query = 'SELECT Id,ParentId,ChildId,KeyValue,Description,Value,Unit,Typ,LastUpdate FROM ['.$table.']';
 		try {
 			 $serverName = $this->ReadPropertyString('Host');
