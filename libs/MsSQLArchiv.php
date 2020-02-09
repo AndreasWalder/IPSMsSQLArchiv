@@ -142,7 +142,7 @@ trait Database
 		$VarName = iconv('UTF-8', 'UTF-16LE', $VarName); //convert into native encoding 
 		$VarName = bin2hex($VarName); //convert into hexadecimal
 		
-		//$Description = iconv('UTF-8', 'UTF-16LE', $Description); //convert into native encoding 
+		$Description = iconv('UTF-8', 'UTF-16LE', $Description); //convert into native encoding 
 		//$Description = bin2hex($Description); //convert into hexadecimal
 		echo $Description;
 		$VarIdWert = '1';
