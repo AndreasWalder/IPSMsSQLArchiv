@@ -124,6 +124,9 @@ trait Database
                 break;
             case VARIABLETYPE_FLOAT:
                 $Typ = 'value REAL, ';
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
+				$SqlValue = 'CONVERT(nvarchar(MAX), 0x'.$Value.')';
                 break;
             case VARIABLETYPE_BOOLEAN:
                 $Typ = 'value BIT, ';
