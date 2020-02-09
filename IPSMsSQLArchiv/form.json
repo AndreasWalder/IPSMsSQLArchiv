@@ -131,7 +131,7 @@
 				{
                     "type": "Button",
                     "caption": "Test",
-                    "onClick": ""
+                    "onClick": "$id"
                 }
             ],
     "status":

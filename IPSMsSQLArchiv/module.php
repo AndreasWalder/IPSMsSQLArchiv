@@ -60,9 +60,8 @@ class ArchiveControlMsSQL extends ipsmodule
      * Interne Funktion des SDK.
      */
 	public function RequestAction($Ident, $Value) {
- 
+        echo $ident;
 		switch($Ident) {
-			echo $Ident;
 			case "TestVariable":
 				//Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
 				//Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet	
