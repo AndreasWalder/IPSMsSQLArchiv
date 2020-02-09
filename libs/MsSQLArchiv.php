@@ -118,6 +118,17 @@ trait Database
 
     protected function CreateAddToTable($VarId, $VarTyp, $Description, $Value, $Unit)
     {
+		$query = 'SELECT ChildId FROM ['.$table.'] WHERE (ChildId = '.$VarId.')'
+		try {
+			 $stmt = $conn->query($query);
+			}
+		catch( PDOException $err ) {
+			echo $err;
+		    return false;
+		}  	
+		echo $stmt;	
+		return true;
+		
         switch ($VarTyp) {
             case VARIABLETYPE_INTEGER:
                 $Typ = 'INT';
@@ -176,7 +187,6 @@ trait Database
 				  CONVERT(nvarchar(MAX), 0x'.$Unit.'),
 				  CONVERT(nvarchar(MAX), 0x'.$Typ.'),
 				  GETDATE())';
-		
 		try {
 			 $stmt = $conn->query( $query );
 			}
