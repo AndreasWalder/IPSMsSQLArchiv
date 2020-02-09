@@ -388,6 +388,7 @@ trait Database
 			}
 		catch( PDOException $err ) {
 			echo $err;
+			echo $this->Translate('Table not exists.');
 		    return false;
 		}  	
 		    $Typ = $result['Typ'];
