@@ -392,10 +392,10 @@ trait Database
 		}  	
 		
 		    foreach ($result as $Item) {
-			print_r($Item);
+			//print_r($Item);
             //$Item['VariableID'] = (int) $Item['VariableID'];
 			$VarTyp = $Item['Typ'];
-			echo $VarTyp;
+			print_r($VarTyp);
 			}
 			
 			
