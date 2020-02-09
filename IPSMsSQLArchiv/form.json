@@ -122,7 +122,6 @@
                 }
             ],
     "actions":
-            [
 				"type": "RowLayout",
                 "items": [
 				{
@@ -134,8 +133,7 @@
                     "type": "Button",
                     "caption": "Test Hinzufügen zur Tabelle",
                     "onClick": ""
-                }]
-            ],
+                }],
     "status":
             [
                 {
