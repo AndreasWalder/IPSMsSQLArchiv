@@ -118,6 +118,7 @@ trait Database
 
     protected function CreateAddToTable($VarId, $VarTyp, $Description, $Value, $Unit)
     {
+		$table = $this->ReadPropertyString('Table');	
 		$query = 'SELECT ChildId FROM ['.$table.'] WHERE (ChildId = '.$VarId.')';
 		try {
 			 $stmt = $conn->query($query);
@@ -160,7 +161,6 @@ trait Database
         $database = $this->ReadPropertyString('Database');
 		$conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		$table = $this->ReadPropertyString('Table');	
 		$ParentId = $this->ReadPropertyInteger('ParentId');
 		
 		$VarName = IPS_GetName($VarId);
