@@ -129,6 +129,8 @@ trait Database
                 break;
             case VARIABLETYPE_STRING:
                 $Typ = 'value nvarchar(max), ';
+				$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
+		        $Value = bin2hex($Value); //convert into hexadecimal
                 break;
         }
 		$serverName = $this->ReadPropertyString('Host');
@@ -148,9 +150,6 @@ trait Database
 		
 		$Unit = iconv('UTF-8', 'UTF-16LE', $Unit); //convert into native encoding 
 		$Unit = bin2hex($Unit); //convert into hexadecimal
-		
-		$Value = iconv('UTF-8', 'UTF-16LE', $Value); //convert into native encoding 
-		$Value = bin2hex($Value); //convert into hexadecimal
 		
 		$query = 'INSERT INTO ['.$table.'] (ParentId,ChildId,KeyValue,Description,Value,Unit,LastUpdate) VALUES('.$ParentId.','.$VarId.',CONVERT(nvarchar(MAX), 0x'.$VarName.'),CONVERT(nvarchar(MAX), 0x'.$Description.'),CONVERT(nvarchar(MAX), 0x'.$Value.'),CONVERT(nvarchar(MAX), 0x'.$Unit.'),GETDATE())';
 		
