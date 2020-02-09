@@ -390,12 +390,14 @@ trait Database
 			echo $err;
 		    return false;
 		}  	
-		
+		    $VarTyp = $result['Typ'];
+			print_r($VarTyp);
+			
+			
 		    foreach ($result as $Item) {
 			//print_r($Item);
             //$Item['VariableID'] = (int) $Item['VariableID'];
-			$VarTyp = $Item['Typ'];
-			print_r($VarTyp);
+			
 			}
 			
 			
