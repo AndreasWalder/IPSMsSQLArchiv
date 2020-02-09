@@ -57,10 +57,6 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->Buffer = [];
     }
 	
-	 public function Test()
-    {
-		echo 'Hallo';
-    }
 
     /**
      * Interne Funktion des SDK.
@@ -180,6 +176,12 @@ class ArchiveControlMsSQL extends ipsmodule
         }
         $this->Logout();
         return;
+    }
+	
+	
+	 public function Test()
+    {
+		echo 'Hallo';
     }
 
     /**
