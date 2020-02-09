@@ -139,6 +139,7 @@ class ArchiveControlMsSQL extends ipsmodule
 		
         
         foreach ($Vars as $VarId => $VarTyp) {
+			$Description = '';
 			$this->CreateAddToTable($VarId, $VarTyp, $Description);
 		}
 
