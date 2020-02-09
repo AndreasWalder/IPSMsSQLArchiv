@@ -141,8 +141,6 @@ class ArchiveControlMsSQL extends ipsmodule
 			$Value = GetValue($VarId);
 			$this->CreateAddToTable($VarId, $Vars[$VarId], $Description, $Value, $Unit);
         }
-		
-		$this->GetConfigurationForm();
 
         $this->SetStatus(IS_ACTIVE);
         $this->Logout();
@@ -309,6 +307,7 @@ class ArchiveControlMsSQL extends ipsmodule
      */
     private function LogValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
+		echo $Variable;
         $Vars = $this->Vars;
         if (!array_key_exists($Variable, $Vars)) {
             return false;
