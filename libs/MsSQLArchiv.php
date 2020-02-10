@@ -339,7 +339,7 @@ trait Database
 			 if ($stmt === false) {
                return [];
              }
-			 $result = $stmt->fetch(PDO::FETCH_ASSOC)
+			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 				foreach ($Result as &$Item) {
 					$Item['VariableID'] = (int) $Item['VariableID'];
 				}
