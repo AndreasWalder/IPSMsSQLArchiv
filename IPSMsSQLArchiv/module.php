@@ -213,12 +213,12 @@ class ArchiveControlMsSQL extends ipsmodule
     public function GetConfigurationForm()
     {
         $form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-
+        return;
         $ConfigVars = json_decode($this->ReadPropertyString('Variables'), true);
         //$this->Login();
         $Database = $this->SelectDB();
+		print_r($Database
         $Found = [];
-		
         $TableVarIDs = $this->GetVariableTables();
         for ($Index = 0; $Index < count($ConfigVars); $Index++) {
             $Item = &$ConfigVars[$Index];
@@ -319,7 +319,7 @@ class ArchiveControlMsSQL extends ipsmodule
         if (!array_key_exists($Variable, $Vars)) {
             return false;
         }
-		echo 'Hallo du!';
+		
 		$this->GetConfigurationForm();
 		
         switch ($Vars[$Variable]) {
