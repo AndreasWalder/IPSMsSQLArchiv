@@ -329,16 +329,31 @@ trait Database
         if (!$this->isConnected) {
             return [];
         }
-        $query = "SELECT right(TABLE_NAME,5) as 'VariableID' FROM information_schema.TABLES WHERE table_schema = '" . $this->ReadPropertyString('Database') . "' ORDER BY 'VariableID' ASC";
-        $sqlresult = $conn->query( $query );
-        if ($sqlresult === false) {
-            return [];
-        }
-        $Result = $sqlresult->fetch_all(MYSQLI_ASSOC);
-        foreach ($Result as &$Item) {
-            $Item['VariableID'] = (int) $Item['VariableID'];
-        }
-        return $Result;
+		try {
+			 $serverName = $this->ReadPropertyString('Host');
+			 $database = $this->ReadPropertyString('Database');
+			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			 $query = "SELECT right(TABLE_NAME,5) as 'VariableID' FROM information_schema.TABLES WHERE table_schema = '" . $this->ReadPropertyString('Database') . "' ORDER BY 'VariableID' ASC";
+			 $stmt = $conn->query($query);
+			 if ($stmt === false) {
+               return [];
+             }
+			 $result = $stmt->fetch(PDO::FETCH_ASSOC)
+				foreach ($Result as &$Item) {
+					$Item['VariableID'] = (int) $Item['VariableID'];
+				}
+			 print_r($result);
+			 return $Result;
+			
+			}
+		catch( PDOException $err ) {
+			echo $err;
+		    return false;
+		}  	
+        
+        
+        
     }
 
     protected function GetSummary($VariableId)
