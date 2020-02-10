@@ -63,15 +63,16 @@ trait Database
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
 			 $result = $stmt->fetch(PDO::FETCH_NAMED);
+			 print_r(result);
+			 return $result;
 			}
 		catch( PDOException $err ) {
 			//echo $err;
 			echo $this->Translate('Table not exists.');
 		    return false;
-		}  	
-            return $result;
+		}  	  
         }
-        return true;
+        return false;
     }
 
     protected function Logout()
