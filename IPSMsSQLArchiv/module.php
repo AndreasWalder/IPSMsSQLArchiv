@@ -319,7 +319,7 @@ class ArchiveControlMsSQL extends ipsmodule
         if (!array_key_exists($Variable, $Vars)) {
             return false;
         }
-		
+		echo 'Hallo du!';
 		$this->GetConfigurationForm();
 		
         switch ($Vars[$Variable]) {
