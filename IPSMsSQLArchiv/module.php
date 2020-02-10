@@ -219,6 +219,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $Database = $this->SelectDB();
 		print_r($Database);
         $Found = [];
+		return;
         $TableVarIDs = $this->GetVariableTables();
         for ($Index = 0; $Index < count($ConfigVars); $Index++) {
             $Item = &$ConfigVars[$Index];
