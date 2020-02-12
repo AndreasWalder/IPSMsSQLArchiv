@@ -378,6 +378,27 @@ trait Database
         //print_r($result);
         return $result;
     }
+	
+	protected function GetCountUpdate($VariableId)
+    {
+		$serverName = $this->ReadPropertyString('Host');
+	    $database = $this->ReadPropertyString('Database');
+		$table = $this->ReadPropertyString('Table');
+		$query = 'SELECT COUNT(*) AS Count FROM '.$table.' GROUP BY ChildId HAVING (ChildId = '.$VariableId.')';
+		try {	 
+			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			 $stmt = $conn->query($query);
+			 $result = $stmt->fetch(PDO::FETCH_NAMED);
+			 //print_r($result);
+			}
+		catch( PDOException $err ) {
+			echo $err;
+		    return false;
+		}  	
+        //print_r($result);
+        return $result;
+    }
 
     protected function WriteValue($Variable, $NewValue, $HasChanged, $Timestamp)
     {
