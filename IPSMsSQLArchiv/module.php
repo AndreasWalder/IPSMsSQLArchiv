@@ -236,7 +236,15 @@ class ArchiveControlMsSQL extends ipsmodule
             }
 			//print_r($Item);
 			$FirstUpdate = $this->GetFirstUpdate($VarId);
-			$Item['FirstTimestamp'] = $FirstUpdate['LastUpdate'];
+			if ($FirstUpdate['LastUpdate'] == '')
+			{
+			  $Item['LastTimestamp'] = $this->Translate('unknown');
+			}
+			else 
+			{
+			  $Item['FirstTimestamp'] = $FirstUpdate['LastUpdate'];
+			}
+			
 			
 			$LastUpdate = $this->GetLastUpdate($VarId);
 			$Item['LastTimestamp'] = $LastUpdate['LastUpdate'];
