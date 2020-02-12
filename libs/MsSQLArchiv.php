@@ -342,11 +342,24 @@ trait Database
         if (!$this->isConnected) {
             return false;
         }
+		$serverName = $this->ReadPropertyString('Host');
+	    $database = $this->ReadPropertyString('Database');
+		$table = $this->ReadPropertyString('Table');		
+		$query = 'SELECT LastUpdate FROM '.$table.' WHERE (ChildId = '.$VariableId.') ORDER BY LastUpdate';
+		try {	 
+			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			 $stmt = $conn->query($query);
+			 $result = $stmt->fetch(PDO::FETCH_ASSOC);
+			 if ($result <> '') {return;}
+			 print_r($result);
+			}
+		catch( PDOException $err ) {
+			echo $err;
+		    return false;
+		}  	
 
-        $query = "SELECT unix_timestamp(timestamp) AS 'TimeStamp' " .
-                'FROM  var' . $VariableId . ' ' .
-                'ORDER BY timestamp ASC ' .
-                'LIMIT 1';
+        return;
         /* @var $sqlresult mysqli_result */
 
         $sqlresult = $conn->query( $query );

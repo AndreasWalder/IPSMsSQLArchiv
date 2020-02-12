@@ -218,11 +218,9 @@ class ArchiveControlMsSQL extends ipsmodule
     public function GetConfigurationForm()
     {
         $form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-        return;
         $ConfigVars = json_decode($this->ReadPropertyString('Variables'), true);
-        //$this->Login();
-        $Database = $this->SelectDB();
-		print_r($Database);
+		print_r($ConfigVars);
+		return;
         $Found = [];
         $TableVarIDs = $this->GetVariableTables();
         for ($Index = 0; $Index < count($ConfigVars); $Index++) {
