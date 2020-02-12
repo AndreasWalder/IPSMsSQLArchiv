@@ -405,7 +405,7 @@ trait Database
 		$serverName = $this->ReadPropertyString('Host');
 	    $database = $this->ReadPropertyString('Database');
 		$table = $this->ReadPropertyString('Table');
-		$query = 'SELECT DATALENGTH(Value) AS Bytes FROM '.$table.' WHERE (ChildId = '.$VariableId.')';
+		$query = 'SELECT MAX(DATALENGTH(Value)) AS Bytes FROM '.$table.' WHERE (ChildId = '.$VariableId.')';
 		try {	 
 			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );

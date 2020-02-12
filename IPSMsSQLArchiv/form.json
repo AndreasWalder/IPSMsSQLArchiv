@@ -111,7 +111,7 @@
                             "add": "",
                             "save": false
                         }, {
-                            "caption": "Bytes",
+                            "caption": "max Bytes",
                             "name": "Bytes",
                             "width": "100px",
                             "add": "",
