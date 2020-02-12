@@ -12,7 +12,7 @@
             "First value": "Erster Wert",
             "Last value": "Letzter Wert",
             "Count": "Anzahl",
-            "Size": "Größe",
+            "Bytes": "Bytes",
             "Database connected.": "Datenbank verbunden.",
             "No connection.": "Keine Verbindung.",
             "Cannot connect to database.": "Fehler beim Verbinden zur Datenbank.",

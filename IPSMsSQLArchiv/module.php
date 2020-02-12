@@ -268,14 +268,14 @@ class ArchiveControlMsSQL extends ipsmodule
 			  $Item['Count'] = $Count['Count'];
 			}
 			
-			$Size = $this->GetSizeUpdate($VarId);
-			if ($Size['Size'] == '')
+			$Bytes = $this->GetBytesUpdate($VarId);
+			if ($Bytes['Bytes'] == '')
 			{
-			  $Item['Size'] = $this->Translate('unknown');
+			  $Item['Bytes'] = $this->Translate('unknown');
 			}
 			else 
 			{
-			  $Item['Size'] = $Size['Size'];
+			  $Item['Bytes'] = $Bytes['Bytes'];
 			}
 			
         }
@@ -733,7 +733,7 @@ class ArchiveControlMsSQL extends ipsmodule
             $Item['RecordCount'] = (int) $Result['Count'];
             $Item['FirstTime'] = (int) $Result['FirstTimestamp'];
             $Item['LastTime'] = (int) $Result['LastTimestamp'];
-            $Item['RecordSize'] = (int) $Result['Size'];
+            $Item['RecordSize'] = (int) $Result['Bytes'];
             $Item['AggregationType'] = 0;
             $Item['AggregationVisible'] = true;
             $Item['AggregationActive'] = array_key_exists($Item['VariableID'], $Vars);

@@ -111,8 +111,8 @@
                             "add": "",
                             "save": false
                         }, {
-                            "caption": "Size",
-                            "name": "Size",
+                            "caption": "Bytes",
+                            "name": "Bytes",
                             "width": "100px",
                             "add": "",
                             "save": false

@@ -400,12 +400,12 @@ trait Database
         return $result;
     }
 	
-	protected function GetSizeUpdate($VariableId)
+	protected function GetBytesUpdate($VariableId)
     {
 		$serverName = $this->ReadPropertyString('Host');
 	    $database = $this->ReadPropertyString('Database');
 		$table = $this->ReadPropertyString('Table');
-		$query = 'SELECT DATALENGTH(Value) AS Size FROM '.$table.' WHERE (ChildId = '.$VariableId.')';
+		$query = 'SELECT DATALENGTH(Value) AS Bytes FROM '.$table.' WHERE (ChildId = '.$VariableId.')';
 		try {	 
 			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
