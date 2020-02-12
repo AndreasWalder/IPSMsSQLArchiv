@@ -135,7 +135,7 @@ class ArchiveControlMsSQL extends ipsmodule
               return;
 			}    
 			$this->Translate('New database created. -> OK');
-			$this->Translate('Done')
+			$this->Translate('Done');
         }
 		
 		if (!$this->TableExist()) {
