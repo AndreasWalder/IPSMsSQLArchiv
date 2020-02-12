@@ -236,7 +236,7 @@ class ArchiveControlMsSQL extends ipsmodule
                     $Item['rowColor'] = '#ff0000';
                 }
             }
-			print_r($Item);
+			//print_r($Item);
 			$Result = $this->GetSummary($VarId);
 			print_r($Result);
 			/*
