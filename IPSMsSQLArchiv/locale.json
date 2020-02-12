@@ -16,7 +16,7 @@
             "Database connected.": "Datenbank verbunden.",
             "No connection.": "Keine Verbindung.",
             "Cannot connect to database.": "Fehler beim Verbinden zur Datenbank.",
-			"New database created. -> OK": "Datenbank neu erstellt. -> OK",
+			"New database created.": "Datenbank neu erstellt.",
             "Error on create table.": "Fehler beim erstellen der Tabelle.",
 			"Table has no name.": "Tabelle hat keinen Namen.",
 			"Table not exists.": "Tabelle existiert nicht.",
