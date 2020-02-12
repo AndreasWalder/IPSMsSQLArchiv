@@ -348,13 +348,13 @@ trait Database
 			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			 $stmt = $conn->query($query);
 			 $result = $stmt->fetch(PDO::FETCH_NAMED);
-			 print_r($result);
+			 //print_r($result);
 			}
 		catch( PDOException $err ) {
 			echo $err;
 		    return false;
 		}  	
-        print_r($result);
+        //print_r($result);
         return $result;
         /* @var $sqlresult mysqli_result */
 
