@@ -219,10 +219,8 @@ class ArchiveControlMsSQL extends ipsmodule
     {
         $form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
         $ConfigVars = json_decode($this->ReadPropertyString('Variables'), true);
-		print_r($ConfigVars);
-		return;
         $Found = [];
-        $TableVarIDs = $this->GetVariableTables();
+        //$TableVarIDs = $this->GetVariableTables();
         for ($Index = 0; $Index < count($ConfigVars); $Index++) {
             $Item = &$ConfigVars[$Index];
             $VarId = $Item['VariableId'];
@@ -238,6 +236,7 @@ class ArchiveControlMsSQL extends ipsmodule
                     $Item['rowColor'] = '#ff0000';
                 }
             }
+			/*
             if ($Database) {
                 $Result = $this->GetSummary($VarId);
                 if (!$Result) {
@@ -266,7 +265,9 @@ class ArchiveControlMsSQL extends ipsmodule
                 continue;
             }
             $Found[] = $VarId;
+			*/
         }
+		return;
         unset($Item);
         // Hier fehlen nicht mehr geloggte Variablen von denen aber noch Tabellen vorhanden sind
         //$ConfigVars = array_values($ConfigVars);
