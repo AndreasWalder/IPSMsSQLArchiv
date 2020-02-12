@@ -225,7 +225,6 @@ class ArchiveControlMsSQL extends ipsmodule
             $Item = &$ConfigVars[$Index];
             $VarId = $Item['VariableId'];
             $Item['Variable'] = $Item['VariableId'];
-			print_r($Item);
             if ($Item['VariableId'] == 0) {
                 $Item['rowColor'] = '#ff0000';
                 continue;
@@ -237,6 +236,7 @@ class ArchiveControlMsSQL extends ipsmodule
                     $Item['rowColor'] = '#ff0000';
                 }
             }
+			print_r($Item);
 			$Result = $this->GetSummary($VarId);
 			print_r($Result);
 			/*
