@@ -103,8 +103,8 @@ class ArchiveControlMsSQL extends ipsmodule
         }
         $this->Vars = [];
         $Vars = [];
-		
-		foreach ($ConfigVars as $Item) {
+
+        foreach ($ConfigVars as $Item) {
             $VarId = $Item['VariableId'];
             if ($VarId <= 0) {
                 continue;
@@ -118,8 +118,6 @@ class ArchiveControlMsSQL extends ipsmodule
             $this->RegisterVariableWatch($VarId);
             $Vars[$VarId] = IPS_GetVariable($VarId)['VariableType'];
         }
-        $this->Vars = $Vars;
-
         $this->Vars = $Vars;
 
         if ($this->ReadPropertyString('Host') == '') {
