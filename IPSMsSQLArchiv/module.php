@@ -128,13 +128,14 @@ class ArchiveControlMsSQL extends ipsmodule
         }
 
         if (!$this->Login()) {
-            echo $this->Translate('Cannot connect to database.');
+			trigger_error($this->Translate('Cannot connect to database.'), E_USER_NOTICE);
 			if (!$this->CreateDB()) {
 			  echo $this->Translate('Create database failed.');
 			  $this->SetStatus(IS_EBASE + 2);
               return;
 			}    
-			echo $this->Translate('New database created. -> OK');
+			$this->Translate('New database created. -> OK');
+			$this->Translate('Done')
         }
 		
 		if (!$this->TableExist()) {
