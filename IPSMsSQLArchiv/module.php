@@ -238,8 +238,9 @@ class ArchiveControlMsSQL extends ipsmodule
             }
 			//print_r($Item);
 			$Result = $this->GetSummary($VarId);
-			$Item['LastTimestamp'] = strftime('%c', $Result['LastTimestamp']);
 			print_r($Result);
+			$Item['LastTimestamp'] = strftime('%c', $Result['LastUpdate']);
+			
 			/*
             if ($Database) {
                 $Result = $this->GetSummary($VarId);
