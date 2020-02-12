@@ -339,9 +339,6 @@ trait Database
 
     protected function GetSummary($VariableId)
     {
-        if (!$this->isConnected) {
-            return false;
-        }
 		$serverName = $this->ReadPropertyString('Host');
 	    $database = $this->ReadPropertyString('Database');
 		$table = $this->ReadPropertyString('Table');		
@@ -359,7 +356,7 @@ trait Database
 		    return false;
 		}  	
 
-        return;
+        return $result;
         /* @var $sqlresult mysqli_result */
 
         $sqlresult = $conn->query( $query );
