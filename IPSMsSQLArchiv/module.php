@@ -235,6 +235,9 @@ class ArchiveControlMsSQL extends ipsmodule
                 }
             }
 			//print_r($Item);
+			
+			$Item['VariableID'] = $Item['VariableId'];  
+			
 			$FirstUpdate = $this->GetFirstUpdate($VarId);
 			if ($FirstUpdate['LastUpdate'] == '')
 			{
@@ -255,80 +258,29 @@ class ArchiveControlMsSQL extends ipsmodule
 			  $Item['LastTimestamp'] = $LastUpdate['LastUpdate'];
 			}
 			
-			
-			
-			
-			
 			$Count = $this->GetCountUpdate($VarId);
-			$Item['Count'] = $Count['Count'];
+			if ($Count['Count'] == '')
+			{
+			  $Item['Count'] = $this->Translate('unknown');
+			}
+			else 
+			{
+			  $Item['Count'] = $Count['Count'];
+			}
 			
 			$Size = $this->GetSizeUpdate($VarId);
-            $Item['Size'] = $Size['Size'];
+			if ($Size['Size'] == '')
+			{
+			  $Item['Size'] = $this->Translate('unknown');
+			}
+			else 
+			{
+			  $Item['Size'] = $Size['Size'];
+			}
 			
-			$Item['VariableID'] = $Item['VariableId'];  
-
-			
-			
-			
-			/*
-            if ($Database) {
-                $Result = $this->GetSummary($VarId);
-                if (!$Result) {
-                    $Item['Count'] = $this->Translate('unknown');
-                    $Item['FirstTimestamp'] = $this->Translate('unknown');
-                    $Item['LastTimestamp'] = $this->Translate('unknown');
-                    $Item['Size'] = $this->Translate('unknown');
-                } else {
-                    $Item['Count'] = $Result['Count'];
-                    $Item['FirstTimestamp'] = strftime('%c', $Result['FirstTimestamp']);
-                    $Item['LastTimestamp'] = strftime('%c', $Result['LastTimestamp']);
-                    $Item['Size'] = sprintf('%.2f MB', ($Result['Size'] / 1024 / 1024), 2);
-                    $Key = array_search(['VariableID' => $VarId], $TableVarIDs);
-                    if ($Key !== false) {
-                        unset($TableVarIDs[$Key]);
-                    }
-                }
-            } else {
-                $Item['Count'] = $this->Translate('unknown');
-                $Item['FirstTimestamp'] = $this->Translate('unknown');
-                $Item['LastTimestamp'] = $this->Translate('unknown');
-                $Item['Size'] = $this->Translate('unknown');
-            }
-            if (in_array($VarId, $Found)) {
-                $Item['rowColor'] = '#ffff00';
-                continue;
-            }
-            $Found[] = $VarId;
-			*/
         }
         unset($Item);
-        // Hier fehlen nicht mehr geloggte Variablen von denen aber noch Tabellen vorhanden sind
-        //$ConfigVars = array_values($ConfigVars);
-//        foreach ($TableVarIDs as $Var)
-//        {
-//            $Item = array('VariableId' => -1, 'Variable' => '');
-//            if (IPS_VariableExists($Var['VariableID']))
-//                $Item['Variable'] = IPS_GetLocation($Var['VariableID']);
-//
-//            $Result = $this->GetSummary($Var['VariableID']);
-//            if (!$Result)
-//            {
-//                $Item['Count'] = 'Unbekannt';
-//                $Item['FirstTimestamp'] = 'Unbekannt';
-//                $Item['LastTimestamp'] = 'Unbekannt';
-//                $Item['Size'] = 'Unbekannt';
-//            }
-//            else
-//            {
-//                $Item['Count'] = $Result['Count'];
-//                $Item['FirstTimestamp'] = strftime('%c', $Result['FirstTimestamp']);
-//                $Item['LastTimestamp'] = strftime('%c', $Result['LastTimestamp']);
-//                $Item['Size'] = sprintf('%.2f MB', ((int) $Result['Size'] / 1024 / 1024), 2);
-//                $Item['rowColor'] = '#ff0000';
-//            }
-//            $ConfigVars[] = $Item;
-//        }
-        //$this->SendDebug('FORM', $ConfigVars, 0);
+       
         $form['elements'][1]['values'] = $ConfigVars;
         $form['actions'][0]['onClick'] = '$id=IPS_CreateScript(0);'
                 . 'IPS_SetParent($id, ' . $this->InstanceID . ');'
