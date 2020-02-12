@@ -48,6 +48,16 @@ trait Database
 	
     protected function CreateDB()
     {
+		try {
+            $serverName = "ANDREASPC\SQLEXPRESS";
+            $conn = new PDO( "sqlsrv:server=$serverName;Database = master", NULL, NULL);   
+			$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            $query = 'CREATE DATABASE ' . $database . '';
+	        $result = $conn->query( $query );
+            }
+            catch( PDOException $err ) {
+              return false;
+            }
         return true;
     }
 
