@@ -244,8 +244,13 @@ class ArchiveControlMsSQL extends ipsmodule
 			$Count = $this->GetCountUpdate($VarId);
 			$Item['Count'] = $Count['Count'];
 			
-			$Item['VariableID'] = $Item['VariableId'];   
-            $Item['Size'] = $this->Translate('unknown');
+			$Size = $this->GetSizeUpdate($VarId);
+            $Item['Size'] = $Size['Size'];
+			
+			$Item['VariableID'] = $Item['VariableId'];  
+
+			
+			
 			
 			/*
             if ($Database) {
