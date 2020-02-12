@@ -235,12 +235,14 @@ class ArchiveControlMsSQL extends ipsmodule
                 }
             }
 			//print_r($Item);
-			$Result = $this->GetFirstUpdate($VarId);
-			$Item['FirstTimestamp'] = $Result['LastUpdate']; //strftime('%c', $Result['LastUpdate']);
-			$Result = $this->GetLastUpdate($VarId);
-			$Item['LastTimestamp'] = $Result['LastUpdate'];
-			$Result = $this->GetCountUpdate($VarId);
-			$Item['Count'] = $Item['Count'];
+			$FirstUpdate = $this->GetFirstUpdate($VarId);
+			$Item['FirstTimestamp'] = $FirstUpdate['LastUpdate'];
+			
+			$LastUpdate = $this->GetLastUpdate($VarId);
+			$Item['LastTimestamp'] = $LastUpdate['LastUpdate'];
+			
+			$Count = $this->GetCountUpdate($VarId);
+			$Item['Count'] = $Count['Count'];
 			
 			$Item['VariableID'] = $Item['VariableId'];   
             $Item['Size'] = $this->Translate('unknown');
