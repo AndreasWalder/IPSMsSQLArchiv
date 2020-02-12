@@ -235,14 +235,17 @@ class ArchiveControlMsSQL extends ipsmodule
                 }
             }
 			//print_r($Item);
-			$Result = $this->GetSummary($VarId);
+			$Result = $this->GetFirstUpdate($VarId);
+			$Item['FirstTimestamp'] = $Result['LastUpdate']; //strftime('%c', $Result['LastUpdate']);
+			$Result = $this->GetLastUpdate($VarId);
+			$Item['LastTimestamp'] = $Result['LastUpdate'];
 			
-			//print_r($Result);
-			$Item['LastTimestamp'] = $Result['LastUpdate']; //strftime('%c', $Result['LastUpdate']);
+			
+			
 			$Item['VariableID'] = $Item['VariableId'];
 			
 			$Item['Count'] = 0;
-            $Item['FirstTimestamp'] = $this->Translate('unknown');
+            
             $Item['Size'] = $this->Translate('unknown');
 			
 			/*
@@ -752,7 +755,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $Data = $this->GetVariableTables();
         $Vars = $this->Vars;
         foreach ($Data as &$Item) {
-            $Result = $this->GetSummary($Item['VariableID']);
+           // $Result = $this->GetSummary($Item['VariableID']);
             $Item['RecordCount'] = (int) $Result['Count'];
             $Item['FirstTime'] = (int) $Result['FirstTimestamp'];
             $Item['LastTime'] = (int) $Result['LastTimestamp'];

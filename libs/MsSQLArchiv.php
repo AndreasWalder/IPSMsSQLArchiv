@@ -337,7 +337,7 @@ trait Database
         return $Result;
     }
 
-    protected function GetSummary($VariableId)
+    protected function GetFirstUpdate($VariableId)
     {
 		$serverName = $this->ReadPropertyString('Host');
 	    $database = $this->ReadPropertyString('Database');
@@ -356,39 +356,27 @@ trait Database
 		}  	
         //print_r($result);
         return $result;
-        /* @var $sqlresult mysqli_result */
-
-        $sqlresult = $conn->query( $query );
-        $Result['FirstTimestamp'] = (int) $sqlresult->fetch_row()[0];
-
-        $query = "SELECT unix_timestamp(timestamp) AS 'TimeStamp' " .
-                'FROM  var' . $VariableId . ' ' .
-                'ORDER BY timestamp DESC ' .
-                'LIMIT 1';
-        /* @var $sqlresult mysqli_result */
-        $sqlresult = $conn->query( $query );
-        $Result['LastTimestamp'] = (int) $sqlresult->fetch_row()[0];
-
-        $query = "SELECT count(*) AS 'Count' " .
-                'FROM  var' . $VariableId . ' ';
-        /* @var $sqlresult mysqli_result */
-        $sqlresult = $conn->query( $query );
-        $Result['Count'] = (int) $sqlresult->fetch_row()[0];
-
-        $query = "SELECT count(*) AS 'Count' " .
-                'FROM  var' . $VariableId . ' ';
-        /* @var $sqlresult mysqli_result */
-        $sqlresult = $conn->query( $query );
-        $Result['Count'] = (int) $sqlresult->fetch_row()[0];
-
-        $query = "SELECT data_length AS 'Size' " .
-                'FROM information_schema.TABLES ' .
-                "WHERE table_schema = '" . $this->ReadPropertyString('Database') . "' " .
-                "AND table_name = 'var" . $VariableId . "' ";
-        /* @var $sqlresult mysqli_result */
-        $sqlresult = $conn->query( $query );
-        $Result['Size'] = (int) $sqlresult->fetch_row()[0];
-        return $Result;
+    }
+	
+	protected function GetLastUpdate($VariableId)
+    {
+		$serverName = $this->ReadPropertyString('Host');
+	    $database = $this->ReadPropertyString('Database');
+		$table = $this->ReadPropertyString('Table');		
+		$query = 'SELECT LastUpdate FROM '.$table.' WHERE (ChildId = '.$VariableId.') ORDER BY LastUpdate DESC';
+		try {	 
+			 $conn = new PDO( "sqlsrv:server=$serverName;Database = $database", NULL, NULL);   
+			 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			 $stmt = $conn->query($query);
+			 $result = $stmt->fetch(PDO::FETCH_NAMED);
+			 //print_r($result);
+			}
+		catch( PDOException $err ) {
+			echo $err;
+		    return false;
+		}  	
+        //print_r($result);
+        return $result;
     }
 
     protected function WriteValue($Variable, $NewValue, $HasChanged, $Timestamp)
