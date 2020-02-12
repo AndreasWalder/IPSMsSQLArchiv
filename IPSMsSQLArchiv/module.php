@@ -238,16 +238,26 @@ class ArchiveControlMsSQL extends ipsmodule
 			$FirstUpdate = $this->GetFirstUpdate($VarId);
 			if ($FirstUpdate['LastUpdate'] == '')
 			{
-			  $Item['LastTimestamp'] = $this->Translate('unknown');
+			  $Item['FirstTimestamp'] = $this->Translate('unknown');
 			}
 			else 
 			{
 			  $Item['FirstTimestamp'] = $FirstUpdate['LastUpdate'];
 			}
 			
-			
 			$LastUpdate = $this->GetLastUpdate($VarId);
-			$Item['LastTimestamp'] = $LastUpdate['LastUpdate'];
+			if ($LastUpdate['LastUpdate'] == '')
+			{
+			  $Item['LastTimestamp'] = $this->Translate('unknown');
+			}
+			else 
+			{
+			  $Item['LastTimestamp'] = $LastUpdate['LastUpdate'];
+			}
+			
+			
+			
+			
 			
 			$Count = $this->GetCountUpdate($VarId);
 			$Item['Count'] = $Count['Count'];
