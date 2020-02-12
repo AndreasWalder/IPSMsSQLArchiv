@@ -239,8 +239,12 @@ class ArchiveControlMsSQL extends ipsmodule
 			
 			//print_r($Result);
 			$Item['LastTimestamp'] = $Result['LastUpdate']; //strftime('%c', $Result['LastUpdate']);
-			$Item['Count'] = 0;
 			$Item['VariableID'] = $Item['VariableId'];
+			
+			$Item['Count'] = $this->Translate('unknown');
+            $Item['FirstTimestamp'] = $this->Translate('unknown');
+            $Item['LastTimestamp'] = $this->Translate('unknown');
+            $Item['Size'] = $this->Translate('unknown');
 			
 			/*
             if ($Database) {
@@ -273,7 +277,6 @@ class ArchiveControlMsSQL extends ipsmodule
             $Found[] = $VarId;
 			*/
         }
-		return;
         unset($Item);
         // Hier fehlen nicht mehr geloggte Variablen von denen aber noch Tabellen vorhanden sind
         //$ConfigVars = array_values($ConfigVars);
