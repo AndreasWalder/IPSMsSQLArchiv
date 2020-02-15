@@ -123,11 +123,6 @@
             ],
     "actions":
             [
-                {
-                    "type": "Button",
-                    "caption": "Create Highcharts Script",
-                    "onClick": ""
-                },
 				{
                     "type": "Button",
                     "caption": "Test",
