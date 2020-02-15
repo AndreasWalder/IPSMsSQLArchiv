@@ -123,11 +123,16 @@
             ],
     "actions":
             [
+                {
+                    "type": "Button",
+                    "caption": "",
+                    "onClick": ""
+                },
 				{
                     "type": "Button",
-                    "caption": "Test",
+                    "caption": "Test_Verbindung",
                     "onClick": "SQL_Debug($id);"
-                },
+                }
             ],
     "status":
             [
