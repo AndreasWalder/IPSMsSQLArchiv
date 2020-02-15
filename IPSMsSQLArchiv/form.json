@@ -123,16 +123,11 @@
             ],
     "actions":
             [
-                {
-                    "type": "Button",
-                    "caption": "Create Highcharts Script",
-                    "onClick": ""
-                },
 				{
                     "type": "Button",
                     "caption": "Test",
                     "onClick": "SQL_Debug($id);"
-                }
+                },
             ],
     "status":
             [
