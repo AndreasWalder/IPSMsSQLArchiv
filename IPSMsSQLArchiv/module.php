@@ -156,7 +156,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->Logout();
     }
 
-    public function LogData()
+    private function LogData()
     {
         $this->SendDebug('Timer [' . $_IPS['THREAD'] . ']', 'Stop', 0);
         $this->SetTimerInterval('LogData', 0);
@@ -189,7 +189,7 @@ class ArchiveControlMsSQL extends ipsmodule
     }
 	
 	
-	 public function Debug()
+	 private function Debug()
     {
 		$this->ApplyChanges();
     }
