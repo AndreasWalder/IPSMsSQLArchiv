@@ -123,11 +123,6 @@
             ],
     "actions":
             [
-                {
-                    "type": "Button",
-                    "caption": "",
-                    "onClick": ""
-                },
 				{
                     "type": "Button",
                     "caption": "Test_Verbindung",
