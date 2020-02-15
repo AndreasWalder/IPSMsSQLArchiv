@@ -189,7 +189,7 @@ class ArchivControlMsSQL extends ipsmodule
     }
 	
 	
-	 private function Debug()
+	 public function Debug()
     {
 		$this->ApplyChanges();
     }
