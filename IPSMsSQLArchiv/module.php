@@ -21,7 +21,7 @@ require_once __DIR__  . '/../libs/helper/SemaphoreHelper.php';
  * @property array $Buffer
  * @property mysqli $DB
  */
-class ArchiveControlMsSQL extends ipsmodule
+class ArchivControlMsSQL extends ipsmodule
 {
     use \Semaphore,
         \BufferHelper,
