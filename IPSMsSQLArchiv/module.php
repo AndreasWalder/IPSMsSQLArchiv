@@ -355,7 +355,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return bool True bei Erfolg, sonst false.
      */
-    public function ChangeVariableID(int $OldVariableID, int $NewVariableID)
+    private function ChangeVariableID(int $OldVariableID, int $NewVariableID)
     {
         if (!IPS_VariableExists($NewVariableID)) {
             trigger_error($this->Translate('NewVariableID is no variable.'), E_USER_NOTICE);
@@ -414,7 +414,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return bool True bei Erfolg, sonst false.
      */
-    public function DeleteVariableData(int $VariableID, int $Startzeit, int $Endzeit)
+    private function DeleteVariableData(int $VariableID, int $Startzeit, int $Endzeit)
     {
         if (!$this->LoginAndSelectDB()) {
             return false;
@@ -447,7 +447,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return array Datensätze
      */
-    public function GetLoggedValues(int $VariableID, int $Startzeit, int $Endzeit, int $Limit)
+    private function GetLoggedValues(int $VariableID, int $Startzeit, int $Endzeit, int $Limit)
     {
         if (($Limit > IPS_GetOption('ArchiveRecordLimit')) or ($Limit == 0)) {
             $Limit = IPS_GetOption('ArchiveRecordLimit');
@@ -512,7 +512,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return bool True wenn logging aktiv ist.
      */
-    public function GetLoggingStatus(int $VariableID)
+    private function GetLoggingStatus(int $VariableID)
     {
         $Vars = $this->Vars;
         return array_key_exists($VariableID, $Vars);
@@ -528,7 +528,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return bool True bei Erfolg, sonst false.
      */
-    public function SetLoggingStatus(int $VariableID, bool $Aktiv)
+    private function SetLoggingStatus(int $VariableID, bool $Aktiv)
     {
         $Vars = $this->Vars;
         if ($Aktiv) { //aktivieren
@@ -572,7 +572,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return int
      */
-    public function GetAggregationType(int $VariableID)
+    private function GetAggregationType(int $VariableID)
     {
         if (!$this->LoginAndSelectDB()) {
             return false;
@@ -594,7 +594,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return bool immer True, außer VariableID wird nicht geloggt.
      */
-    public function GetGraphStatus(int $VariableID)
+    private function GetGraphStatus(int $VariableID)
     {
         if (!$this->LoginAndSelectDB()) {
             return false;
@@ -617,7 +617,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return bool immer True, außer VariableID wird nicht geloggt.
      */
-    public function SetGraphStatus(int $VariableID, bool $Aktiv)
+    private function SetGraphStatus(int $VariableID, bool $Aktiv)
     {
         if (!$this->LoginAndSelectDB()) {
             return false;
@@ -643,7 +643,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return array Datensätze
      */
-    public function GetAggregatedValues(int $VariableID, int $Aggregationsstufe, int $Startzeit, int $Endzeit, int $Limit)
+    private function GetAggregatedValues(int $VariableID, int $Aggregationsstufe, int $Startzeit, int $Endzeit, int $Limit)
     {
         if (($Limit > IPS_GetOption('ArchiveRecordLimit')) or ($Limit == 0)) {
             $Limit = IPS_GetOption('ArchiveRecordLimit');
@@ -720,7 +720,7 @@ class ArchiveControlMsSQL extends ipsmodule
      *
      * @return array Datensätze
      */
-    public function GetAggregationVariables(bool $DatenbankAbfrage)
+    private function GetAggregationVariables(bool $DatenbankAbfrage)
     {
         if (!$this->LoginAndSelectDB()) {
             return false;
