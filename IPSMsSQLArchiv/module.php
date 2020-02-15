@@ -51,6 +51,7 @@ class ArchivControlMsSQL extends ipsmodule
 		$this->RegisterPropertyString('Table', '');
 		$this->RegisterPropertyInteger("ParentId", 0);
         $this->RegisterPropertyString('Variables', json_encode([]));
+        $this->RegisterTimer('LogData', 0, 'SQL_LogData($_IPS[\'TARGET\']);');
 		$this->RegisterTimer("Debug", 0, 'SQL_Debug($_IPS[\'TARGET\']);');
         $this->Vars = [];
         $this->Buffer = [];
@@ -281,11 +282,6 @@ class ArchivControlMsSQL extends ipsmodule
         unset($Item);
        
         $form['elements'][1]['values'] = $ConfigVars;
-        $form['actions'][0]['onClick'] = '$id=IPS_CreateScript(0);'
-                . 'IPS_SetParent($id, ' . $this->InstanceID . ');'
-                . 'IPS_SetName($id,"Highcharts.ips.php");'
-                . 'IPS_SetScriptContent($id, file_get_contents("' . __DIR__ . '/../docs/Highcharts.ips.php"));'
-                . 'echo "' . $this->Translate('Done') . '";';
         $this->Logout();
 
         return json_encode($form);
