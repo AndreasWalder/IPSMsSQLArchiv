@@ -156,7 +156,7 @@ class ArchiveControlMsSQL extends ipsmodule
         $this->Logout();
     }
 
-    private function LogData()
+    public function LogData()
     {
         $this->SendDebug('Timer [' . $_IPS['THREAD'] . ']', 'Stop', 0);
         $this->SetTimerInterval('LogData', 0);
